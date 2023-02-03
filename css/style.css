@@ -11,6 +11,8 @@
     margin: 0 auto;
 }
 
+/* Basic Classes */
+
 .home-section{
     width: 100%;
     height: 100vh;
@@ -29,14 +31,205 @@
     width: 200px;
 }
 .continue-btn a{
-    padding: 18px 100px;
+    padding: 18px 90px;
+
     background: black;
     color: white;
     border-radius: 8px;
 }
 .continue-btn{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
+    text-align: center;
+    transform: translateY(40vh);
 }
+/* Home Section */
+
+.private-section{
+    display: flex;
+}
+.private-info{
+    width: 60%;
+    background: #F9F9F9;
+    padding-top: 30px;
+    height: 100vh;
+}
+.private-seciton-form{
+    width: 80%;
+    margin: auto;
+}
+.private-info-header{
+    width: 80%;
+    margin: auto;
+}
+.private-info-head-parent{
+    display: flex;
+    justify-content: space-between;
+}
+.form-names-parent{
+    display: flex;
+    justify-content: space-between;
+}
+.form-name{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.form-last-name{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.form-upload-picture{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 35px;
+}
+.form-upload-picture input{
+    margin-left: 10px;
+}
+.form-upload-picture input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.form-upload-picture input[type="file"] {
+    color: rgba(0, 0, 0, 0);
+  }
+
+.form-upload-picture input::before{
+    content: "ატვირთვა";
+    display: inline-block;
+    border-radius: 4px;
+    padding: 5px 8px;
+    outline: none;
+    cursor: pointer;
+    background: #0E80BF;
+    color: white;
+}
+.form-name input{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px;
+    margin: 7px 0;
+}
+
+.form-last-name input{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px;
+    margin: 7px 0;
+}
+.form-about-me textarea{
+    width: 100%;
+    padding-bottom: 5rem;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 7px;
+    resize: none;
+}
+.form-about-me{
+    margin-top: 35px;
+}
+.form-email input{
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px 10px;
+    margin: 7px 0;
+}
+.form-email{
+    margin-top: 25px;
+    position: relative;
+}
+.form-number input{
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px 10px;
+    margin: 7px 0;
+}
+.form-number{
+    margin-top: 35px;
+    position: relative;
+}
+.private-info-header hr{
+    margin-top: 5px;
+}
+.private-seciton-form{
+    padding-top: 35px;
+}
+.next-from-private-btn{
+    display: flex;
+    justify-content: flex-end;
+    width: 80%;
+    margin: auto;
+}
+.next-from-private-btn a{
+    background: #6B40E3;
+    color: white;
+    border-radius: 4px;
+    padding: 15px 60px;
+    margin-top: 15px;
+}
+#outPut{
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+  
+}
+
+.parent-result{
+    display: flex;
+    margin: auto;
+    padding-top: 30px;
+    
+}
+.profile-parent{
+    position: absolute;
+    right: 1%;
+  
+}
+.result-title{
+    margin-left: 50px;
+}
+.result-title h1{
+    padding: 1rem 0;
+    color: #F93B1D;
+}
+.result-title h3{
+    margin-top: 15px;
+    color: #F93B1D;
+}
+
+
+.private-section{
+    position: relative;
+}
+#inCorrectEmail{
+    color: red;
+    position: absolute;
+    margin-left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    visibility: hidden;
+    right: 0;
+    margin-right: 10px;
+}
+#correctEmail, #correctName, #correctLastName, #correctNumber {
+    color: #98E37E;
+    position: absolute;
+    margin-left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    visibility: hidden;
+    right: 0;
+    margin-right: 10px;
+}
+
