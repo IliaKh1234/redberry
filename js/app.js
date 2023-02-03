@@ -147,12 +147,7 @@ nextPageFromPrivate.addEventListener('click', function(){
         localStorage.setItem("lastName", lastName.value)
         localStorage.setItem("email", email.value)
         localStorage.setItem("number", number.value)
-        localStorage.setItem("image", output.src)
-
+        localStorage.setItem("image", output.src)   
+        window.location.href = '/pages/experience.html'
     }
-    // localStorage.setItem("image", document.getElementById('outPut').src)
-    // localStorage.removeItem("image")
-    // localStorage.removeItem("name")
 })
-
-
