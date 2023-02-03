@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.home-section{
+    width: 100%;
+    height: 100vh;
+    background: url("../images/main-back.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header{
+    max-width: 95%;
+    margin: auto;
+    padding: 20px;
+}
+#mainLogo{
+    padding-bottom: 15px;
+    width: 200px;
+}
+.continue-btn a{
+    padding: 18px 100px;
+    background: black;
+    color: white;
+    border-radius: 8px;
+}
+.continue-btn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
