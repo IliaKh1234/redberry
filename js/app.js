@@ -147,7 +147,8 @@ nextPageFromPrivate.addEventListener('click', function(){
         localStorage.setItem("lastName", lastName.value)
         localStorage.setItem("email", email.value)
         localStorage.setItem("number", number.value)
-        localStorage.setItem("image", output.src)   
+        localStorage.setItem("image", output.src)
+        localStorage.setItem("aboutMe", aboutMe.value)   
         window.location.href = '/pages/experience.html'
     }
 })
