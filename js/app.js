@@ -3,12 +3,14 @@ const lastName = document.getElementById("lastName")
 const email = document.getElementById("email")
 const number = document.getElementById("phone")
 const aboutMe = document.getElementById("aboutMe")
+const image = document.getElementById("image")
 
 const resultName = document.getElementById("resultName")
 const resultLastName = document.getElementById("resultLastName")
 const resultEmail = document.getElementById("resultEmail")
 const resultNumber = document.getElementById("resultNumber")
 const resultAboutMe = document.getElementById("resultAboutMe")
+
 
 const inCorrectEmail = document.getElementById("inCorrectEmail")
 const correctEmail = document.getElementById("correctEmail")
@@ -103,23 +105,22 @@ aboutMe.addEventListener('keyup', function(event){
     resultAboutMe.innerHTML = value
 })
 
-let loadFile = function(event) {
+image.addEventListener('change', function(event){
     document.querySelector(".profile-parent").innerHTML = `
         <img id="outPut"/>
     `
-    let output = document.getElementById('outPut');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-      URL.revokeObjectURL(output.src)
+    let output = document.getElementById('outPut')
+    output.src = URL.createObjectURL(event.target.files[0])
+    output.onload = function () {
+        URL.revokeObjectURL(output.src)
     }
-    console.log(event.target.files[0])
-    if(event.target.files[0].type){
+    if (event.target.files[0].type) {
         imageCheck = true
-        
-    }else{
+
+    } else {
         imageCheck = false
     }
-};
+})
 
 nextPageFromPrivate.addEventListener('click', function(){
     if(!nameCheck){
@@ -133,10 +134,25 @@ nextPageFromPrivate.addEventListener('click', function(){
         inCorrectEmail.style.visibility = 'visible'
     }
     if(!numberCheck){
-        number.style.border = "1px solid red"
-    }
+            number.style.border = "1px solid red"
+        }
     if(!imageCheck){
         document.getElementById("uploadPictureTitle").style.color = "red"
-    }
+       }
+    let output = document.getElementById('outPut')
+    output.src = URL.createObjectURL(image.files[0])
 
+    if(nameCheck, lastNameCheck, imageCheck, emailCheck, numberCheck){
+        localStorage.setItem("name", name.value)
+        localStorage.setItem("lastName", lastName.value)
+        localStorage.setItem("email", email.value)
+        localStorage.setItem("number", number.value)
+        localStorage.setItem("image", output.src)
+
+    }
+    // localStorage.setItem("image", document.getElementById('outPut').src)
+    // localStorage.removeItem("image")
+    // localStorage.removeItem("name")
 })
+
+
