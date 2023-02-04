@@ -262,8 +262,8 @@ nextPageFromPrivate.addEventListener('click', function(){
        }
 
   
-    // let output = document.getElementById('outPut')
-    // output.src = URL.createObjectURL(image.files[0])
+    let output = document.getElementById('outPut')
+    output.src = URL.createObjectURL(image.files[0])
        if(nameCheck && lastNameCheck && emailCheck && numberCheck && imageCheck){
              window.location.href = '/pages/experience.html'
        }
