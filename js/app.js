@@ -59,7 +59,7 @@ name.addEventListener('keyup', function(event){
         correctName.style.visibility = "visible" 
         nameCheck = true
     }else{
-        name.style.border = "1px solid gray"
+        name.style.border = "1px solid red"
         correctName.style.visibility = "hidden"
         nameCheck = false
     }
@@ -77,7 +77,7 @@ lastName.addEventListener('keyup', function(event){
         correctLastName.style.visibility = "visible" 
         lastNameCheck = true
     }else{
-        name.style.border = "1px solid gray"
+        name.style.border = "1px solid red"
         correctLastName.style.visibility = "hidden"
         lastNameCheck = false
     }
@@ -96,7 +96,7 @@ email.addEventListener('keyup', function(event){
         emailCheck = true
     }else{
         email.style.border = "1px solid #EF5050"
-        document.getElementById("emailTitle").style.color = "#EF5050"  
+        document.getElementById("emailTitle").style.color = "red"  
         inCorrectEmail.style.visibility = 'visible' 
         correctEmail.style.visibility = "hidden" 
         emailCheck = false
@@ -189,18 +189,56 @@ if(window.location.pathname === '/pages/private.html'){
     // let regex = /^[\u10A0-\u10FF]+$/;
     if(name.value === info.name){
         nameCheck = true
+        name.style.border = "1px solid #98E37E"
+        correctName.style.visibility = "visible" 
     }
+    if(name.value === ""){
+        nameCheck = false
+        name.style.border = "1px solid red"
+        correctName.style.visibility = "hidden" 
+    }
+
     if(lastName.value = info.lastName){
         lastNameCheck = true
+        lastName.style.border = "1px solid #98E37E"
+        correctLastName.style.visibility = "visible" 
     }
-    if(email.value = info.email){
+    if(lastName.value === ""){
+        lastNameCheck = false
+        lastName.style.border = "1px solid red"
+        correctLastName.style.visibility = "hidden" 
+    }
+    if(email.value = info.email && "@redberry.ge" === email.value.slice(-12)){
         emailCheck = true
+        email.style.border = "1px solid #98E37E"  
+        correctEmail.style.visibility = "visible" 
+        inCorrectEmail.style.visibility = 'hidden'
+        email.value = emailLocalStorage
     }
-    if(number.value = info.number){
+    if("@redberry.ge" !== email.value.slice(-12)){
+        emailCheck = false
+        email.style.border = "1px solid #EF5050"
+        document.getElementById("emailTitle").style.color = "#EF5050"  
+        inCorrectEmail.style.visibility = 'visible' 
+        correctEmail.style.visibility = "hidden" 
+        email.value = emailLocalStorage
+    }
+    let regex =  /^\+?(995|994)[0-9]{9}$/
+    if(number.value = info.number && regex.test(number.value)){
+        number.style.border = "1px solid #98E37E"
+        correctNumber.style.visibility = "visible" 
         numberCheck = true
+        number.value = numberLocalStorage
+    } if(!regex.test(number.value)){
+        correctNumber.style.visibility = "hidden"
+        number.style.border = "1px solid red"
+        numberCheck = false
+        number.value = numberLocalStorage
     }
     if(imageLocalStorage){
         imageCheck = true
+    } if(!imageLocalStorage){
+        imageCheck = false
     }
 
 }
