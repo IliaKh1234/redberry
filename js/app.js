@@ -10,7 +10,9 @@ const resultLastName = document.getElementById("resultLastName")
 const resultEmail = document.getElementById("resultEmail")
 const resultNumber = document.getElementById("resultNumber")
 const resultAboutMe = document.getElementById("resultAboutMe")
+const resultImage = document.querySelector(".profile-parent")
 
+let output = document.getElementById('outPut')
 
 const inCorrectEmail = document.getElementById("inCorrectEmail")
 const correctEmail = document.getElementById("correctEmail")
@@ -20,11 +22,33 @@ const correctNumber = document.getElementById("correctNumber")
 
 const nextPageFromPrivate = document.getElementById("nextPageFromPrivate")
 
+let url = localStorage.getItem("image")
+let img = new Image
+img.src = url
+
+let nameLocalStorage = localStorage.getItem("name")
+let lastNameLocalStorage = localStorage.getItem("lastName")
+let emailLocalStorage = localStorage.getItem("email")
+let numberLocalStorage = localStorage.getItem("number")
+let aboutMeLocalStorage = localStorage.getItem("aboutMe")
+let imageLocalStorage = localStorage.getItem("image")
+
+const info = {
+    name: nameLocalStorage,
+    lastName: lastNameLocalStorage,
+    email: emailLocalStorage,
+    number: numberLocalStorage,
+    aboutMe: aboutMeLocalStorage,
+    image: imageLocalStorage
+}
+
+
 let nameCheck = false
 let lastNameCheck = false
 let emailCheck = false
 let numberCheck = false
 let imageCheck = false
+
 
 name.addEventListener('keyup', function(event){
     let value = event.target.value
@@ -39,8 +63,9 @@ name.addEventListener('keyup', function(event){
         correctName.style.visibility = "hidden"
         nameCheck = false
     }
-    
+    localStorage.setItem("name", event.target.value)
     resultName.innerHTML = value
+
 })
 
 lastName.addEventListener('keyup', function(event){
@@ -56,7 +81,7 @@ lastName.addEventListener('keyup', function(event){
         correctLastName.style.visibility = "hidden"
         lastNameCheck = false
     }
-
+    localStorage.setItem("lastName", event.target.value)
     resultLastName.innerHTML = event.target.value
 })
 
@@ -76,6 +101,7 @@ email.addEventListener('keyup', function(event){
         correctEmail.style.visibility = "hidden" 
         emailCheck = false
     }
+    localStorage.setItem("email", email.value)
     resultEmail.innerHTML = `<i class="fa-solid fa-at"></i> ${value}` 
 })
 
@@ -91,23 +117,27 @@ number.addEventListener('keyup', function(event){
         number.style.border = "1px solid gray"
         numberCheck = false
     }
-    if(!number.value){
-        document.querySelector(".phone").style.visibility = "hidden"
-    }
-    resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i> ${value}`
+    localStorage.setItem("number", number.value)
+    resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i>  ${value}`
 })
 
 aboutMe.addEventListener('keyup', function(event){
     let value = event.target.value
-    if(aboutMe !== " "){
+    if(aboutMe.value.length >= 1){
         document.getElementById("hiddenAboutMe").style.display = "block"
     }
+    if(aboutMe.value.length === 0){
+        document.getElementById("hiddenAboutMe").style.display = "none"
+
+    }
+
+    localStorage.setItem("aboutMe", aboutMe.value) 
     resultAboutMe.innerHTML = value
 })
 
 image.addEventListener('change', function(event){
-    document.querySelector(".profile-parent").innerHTML = `
-        <img id="outPut"/>
+    resultImage.innerHTML = `
+    <img id="outPut"/>
     `
     let output = document.getElementById('outPut')
     output.src = URL.createObjectURL(event.target.files[0])
@@ -120,7 +150,60 @@ image.addEventListener('change', function(event){
     } else {
         imageCheck = false
     }
+
+    
+    const image = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.onload = function() {
+    var result = reader.result;
+        localStorage.setItem("image", result)
+       };
+   
 })
+
+
+if(window.location.pathname === '/pages/experience.html'){
+    resultName.innerHTML = info.name
+    resultLastName.innerHTML = info.lastName
+    resultEmail.innerHTML = ` <i class="fa-solid fa-at"></i>  ${info.email}`
+    resultNumber.innerHTML =  `<i class="fa-solid fa-phone phone"></i> ${info.number}`
+    resultAboutMe.innerHTML = info.aboutMe
+    resultImage.appendChild(img)
+
+}
+
+if(window.location.pathname === '/pages/private.html'){
+    resultName.innerHTML = info.name
+    resultLastName.innerHTML = info.lastName
+    resultEmail.innerHTML = ` <i class="fa-solid fa-at"></i>  ${info.email}`
+    resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i> ${info.number}`
+    resultAboutMe.innerHTML = info.aboutMe
+
+    name.value = info.name
+    lastName.value = info.lastName
+    email.value = info.email
+    number.value = info.number
+    aboutMe.value = info.aboutMe
+    resultImage.appendChild(img)
+    // let regex = /^[\u10A0-\u10FF]+$/;
+    if(name.value === info.name){
+        nameCheck = true
+    }
+    if(lastName.value = info.lastName){
+        lastNameCheck = true
+    }
+    if(email.value = info.email){
+        emailCheck = true
+    }
+    if(number.value = info.number){
+        numberCheck = true
+    }
+    if(imageLocalStorage){
+        imageCheck = true
+    }
+
+}
 
 nextPageFromPrivate.addEventListener('click', function(){
     if(!nameCheck){
@@ -139,16 +222,18 @@ nextPageFromPrivate.addEventListener('click', function(){
     if(!imageCheck){
         document.getElementById("uploadPictureTitle").style.color = "red"
        }
-    let output = document.getElementById('outPut')
-    output.src = URL.createObjectURL(image.files[0])
 
-    if(nameCheck, lastNameCheck, imageCheck, emailCheck, numberCheck){
-        localStorage.setItem("name", name.value)
-        localStorage.setItem("lastName", lastName.value)
-        localStorage.setItem("email", email.value)
-        localStorage.setItem("number", number.value)
-        localStorage.setItem("image", output.src)
-        localStorage.setItem("aboutMe", aboutMe.value)   
-        window.location.href = '/pages/experience.html'
-    }
+  
+    // let output = document.getElementById('outPut')
+    // output.src = URL.createObjectURL(image.files[0])
+       if(nameCheck && lastNameCheck && emailCheck && numberCheck && imageCheck){
+             window.location.href = '/pages/experience.html'
+       }
 })
+
+// localStorage.removeItem("name")
+// localStorage.removeItem("lastName")
+// localStorage.removeItem("email")
+// localStorage.removeItem("number")
+// localStorage.removeItem("image")
+// localStorage.removeItem("aboutMe")  

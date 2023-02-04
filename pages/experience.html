@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section class="private-section">
+        <div class="private-info">
+            <header class="private-info-header">
+                <div class="private-info-head-parent">
+                    <h1>პირადი ინფო</h1>
+                    <h1>1/3</h1>
+                </div>
+                <hr>
+            </header>
+                <form class="private-seciton-form" action="">
+                    <div class="form-names-parent" >
+                        <div class="form-name">
+                            <h3>სახელი</h3>
+                            <input type="text" id="name" placeholder="ანზორ">
+                            <i id="correctName" class="fa-solid fa-circle-check"></i>
+                            <p style="color: gray;">მინიმუმ 2 ასო, ქართული ასოები</p>
+                        </div>
+                        <div class="form-last-name">
+                            <h3>გვარი</h3>
+                            <input type="text" id="lastName" placeholder="მუმლაძე">
+                            <i id="correctLastName" class="fa-solid fa-circle-check"></i>
+                            <p style="color: gray;">მინიმუმ 2 ასო, ქართული ასოები</p>
+                        </div>
+                    </div>
+                    <div class="form-upload-picture">
+                        <h3 id="uploadPictureTitle">პირადი ფოტოს ატვირთვა</h3>
+                        <input id="image" type="file">
+                    </div>
+                    <div class="form-about-me" >
+                        <h3>ჩემს შესახებ (არასავალდებულო)</h3>
+                        <textarea id="aboutMe" placeholder="ზოგადი ინფო შენ შესახებ"></textarea>
+                    </div>
+                    <div class="form-email">
+                        <h3 id="emailTitle">ელ.ფოსტა</h3>
+                        <input id="email" type="email" placeholder="anzor666@redberry.com">
+                        <i id="inCorrectEmail" class="fa-solid fa-triangle-exclamation"></i>
+                        <i id="correctEmail" class="fa-solid fa-circle-check"></i>
+                        <p style="color: gray;">უნდა მთავრდებოდეს @redberry.ge-ით</p>
+                    </div>
+                    <div class="form-number">
+                        <h3>მობილურის ნომერი</h3>
+                        <input id="phone" type="text" placeholder="+995 551 12 34 56">
+                        <i id="correctNumber" class="fa-solid fa-circle-check"></i>
+                        <p style="color: gray;">უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</p>
+                    </div>
+                </form>
+                <div class="next-from-private-btn">
+                    <a id="nextPageFromPrivate" href="#">შემდეგი</a>
+                </div>
+        </div>
+        <div class="private-info-result">
+            <div class="parent-result" >
+                <div class="result-title">
+                    <div style="display: flex;">
+                        <h1 style="font-size: 34px; font-weight: 700;" id="resultName" > </h1> &nbsp; &nbsp;
+                        <h1 style="font-size: 34px; font-weight: 700;" id="resultLastName"> </h1>
+                        &nbsp;
+                    </div>
+                    &nbsp;
+                    <p style="font-size: 18px; color: gray;" id="resultEmail"> </p>
+                    <p style="font-size: 18px; color: gray;" id="resultNumber"> </p>
+                    &nbsp;
+                    <h3 id="hiddenAboutMe" style="display: none; font-size: 18px; font-weight: 700;">ჩემ შესახებ</h3>
+                    &nbsp;
+                    <div style="width: 43vh;">
+                        <p id="resultAboutMe" style="font-size: 16px;" > </p>
+                    </div>
+                    
+                </div>
+                <div class="profile-parent"></div>
+            </div>      
+        </div>
+    </section>
+    <script src="../js/app.js"></script>
+</body>
+</html>

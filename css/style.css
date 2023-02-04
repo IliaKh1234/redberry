@@ -185,7 +185,13 @@
     width: 230px;
     height: 230px;
     border-radius: 50%;
-  
+    object-fit: cover;
+}
+.profile-parent img{
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .parent-result{
@@ -218,13 +224,11 @@
 #inCorrectEmail{
     color: red;
     position: absolute;
-    margin-left: 10px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
     visibility: hidden;
-    right: 0;
-    margin-right: 10px;
+    right: -27px;
 }
 #correctEmail, #correctName, #correctLastName, #correctNumber {
     color: #98E37E;
@@ -238,3 +242,8 @@
     margin-right: 10px;
 }
 
+.experienceImg{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
