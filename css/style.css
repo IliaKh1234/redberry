@@ -1,9 +1,14 @@
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('../font/HelveticaNeue.ttc');
+}
 * {
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
+    font-family: 'HelveticaNeue';
   }
   
 .container {
