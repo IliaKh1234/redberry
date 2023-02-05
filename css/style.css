@@ -17,7 +17,12 @@
 }
 
 /* Basic Classes */
-
+#backgroundLogo{
+    width: 300px;
+    position: absolute;
+    top: 44%;
+    left: 55%;
+}
 .home-section{
     width: 100%;
     height: 100vh;
@@ -77,11 +82,13 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    width: 35%;
 }
 .form-last-name{
     display: flex;
     flex-direction: column;
     position: relative;
+    width: 35%;
 }
 .form-upload-picture{
     display: flex;
@@ -240,6 +247,15 @@
     color: red;
     visibility: hidden;
 }
+#inCorrectName, #inCorrectLastName, #inCorrectNumber{
+    position: absolute;
+    right: -27px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: red;
+    visibility: hidden;
+}
 #correctEmail, #correctName, #correctLastName, #correctNumber {
     color: #98E37E;
     position: absolute;
@@ -256,4 +272,23 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
+}
+#clearAll{
+    background: white;
+    padding: 13px 17px;
+    border-radius: 50%;
+    font-size: 20px;
+    position: absolute;
+    color: black;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+}
+#resumeLogo{
+    position: absolute;
+    bottom: 3%;
+    left: 10%;
+}
+.private-info-result{
+    position: relative;
 }

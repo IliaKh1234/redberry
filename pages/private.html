@@ -10,6 +10,7 @@
 </head>
 <body>
     <section class="private-section">
+        <i id="clearAll" class="fa-solid fa-chevron-left"></i>
         <div class="private-info">
             <header class="private-info-header">
                 <div class="private-info-head-parent">
@@ -25,12 +26,14 @@
                             <input type="text" id="name" placeholder="ანზორ" value="">
                             <i id="correctName" class="fa-solid fa-circle-check"></i>
                             <p style="color: gray;">მინიმუმ 2 ასო, ქართული ასოები</p>
+                            <i id="inCorrectName" class="fa-solid fa-triangle-exclamation"></i>
                         </div>
                         <div class="form-last-name">
                             <h3>გვარი</h3>
                             <input type="text" id="lastName" placeholder="მუმლაძე">
                             <i id="correctLastName" class="fa-solid fa-circle-check"></i>
                             <p style="color: gray;">მინიმუმ 2 ასო, ქართული ასოები</p>
+                            <i id="inCorrectLastName" class="fa-solid fa-triangle-exclamation"></i>
                         </div>
                     </div>
                     <div class="form-upload-picture">
@@ -52,6 +55,7 @@
                     <div class="form-number">
                         <h3>მობილურის ნომერი</h3>
                         <input id="phone" type="text" placeholder="+995 551 12 34 56">
+                        <i id="inCorrectNumber" class="fa-solid fa-triangle-exclamation"></i>
                         <i id="correctNumber" class="fa-solid fa-circle-check"></i>
                         <p style="color: gray;">უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</p>
                     </div>
@@ -80,7 +84,8 @@
                     
                 </div>
                 <div class="profile-parent"></div>
-            </div>      
+            </div>
+            <img id="resumeLogo" src="../images/resume-logo.png" alt="">      
         </div>
     </section>
     <script src="../js/app.js"></script>

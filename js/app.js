@@ -20,6 +20,9 @@ const correctName = document.getElementById("correctName")
 const correctLastName = document.getElementById("correctLastName")
 const correctNumber = document.getElementById("correctNumber")
 const inCorrectImage = document.getElementById("inCorrectImage")
+const inCorrectName = document.getElementById("inCorrectName")
+const inCorrectLastName = document.getElementById("inCorrectLastName")
+const inCorrectNumber = document.getElementById("inCorrectNumber")
 
 const nextPageFromPrivate = document.getElementById("nextPageFromPrivate")
 
@@ -50,6 +53,16 @@ let emailCheck = false
 let numberCheck = false
 let imageCheck = false
 
+document.getElementById("clearAll").addEventListener("click", function(){
+    window.location.href = '../index.html'
+    localStorage.removeItem("name")
+    localStorage.removeItem("lastName")
+    localStorage.removeItem("email")
+    localStorage.removeItem("number")
+    localStorage.removeItem("image")
+    localStorage.removeItem("aboutMe")
+    
+})
 
 name.addEventListener('keyup', function(event){
     let value = event.target.value
@@ -58,9 +71,11 @@ name.addEventListener('keyup', function(event){
     if(value.length >= 2 && regex.test(name.value)){
         name.style.border = "1px solid #98E37E"
         correctName.style.visibility = "visible" 
+        inCorrectName.style.visibility = "hidden"
         nameCheck = true
     }else{
         name.style.border = "1px solid red"
+        inCorrectName.style.visibility = "visible"
         correctName.style.visibility = "hidden"
         nameCheck = false
     }
@@ -78,7 +93,7 @@ lastName.addEventListener('keyup', function(event){
         correctLastName.style.visibility = "visible" 
         lastNameCheck = true
     }else{
-        name.style.border = "1px solid red"
+        lastName.style.border = "1px solid red"
         correctLastName.style.visibility = "hidden"
         lastNameCheck = false
     }
@@ -112,10 +127,12 @@ number.addEventListener('keyup', function(event){
     if(regex.test(number.value)){
         number.style.border = "1px solid #98E37E"
         correctNumber.style.visibility = "visible" 
+        inCorrectNumber.style.visibility = "hidden"
         numberCheck = true
     }else{
         correctNumber.style.visibility = "hidden"
-        number.style.border = "1px solid gray"
+        number.style.border = "1px solid red"
+        inCorrectNumber.style.visibility = "visible"
         numberCheck = false
     }
     localStorage.setItem("number", number.value)
@@ -232,20 +249,23 @@ if(window.location.pathname === '/pages/private.html'){
 nextPageFromPrivate.addEventListener('click', function(){
     if(!nameCheck){
         name.style.border = "1px solid red"
+        inCorrectName.style.visibility = "visible"
     }
     if(!lastNameCheck){
         lastName.style.border = "1px solid red"
+        inCorrectLastName.style.visibility = "visible"
     }
     if(!emailCheck){
         email.style.border = "1px solid red"
         inCorrectEmail.style.visibility = 'visible'
     }
     if(!numberCheck){
-            number.style.border = "1px solid red"
-        }
+        number.style.border = "1px solid red"
+        inCorrectNumber.style.visibility = "visible"
+    }
     if(!imageCheck){
         inCorrectImage.style.visibility = "visible"
-       }
+    }
 
   
     let output = document.getElementById('outPut')
@@ -254,10 +274,3 @@ nextPageFromPrivate.addEventListener('click', function(){
              window.location.href = '/pages/experience.html'
        }
 })
-console.log(info)
-// localStorage.removeItem("name")
-// localStorage.removeItem("lastName")
-// localStorage.removeItem("email")
-// localStorage.removeItem("number")
-// localStorage.removeItem("image")
-// localStorage.removeItem("aboutMe")  
