@@ -75,7 +75,7 @@ name.addEventListener('keyup', function(event){
         nameCheck = true
     }else{
         name.style.border = "1px solid red"
-        inCorrectName.style.visibility = "visible"
+        inCorrectName.style.visibility = "hidden"
         correctName.style.visibility = "hidden"
         nameCheck = false
     }
