@@ -19,6 +19,7 @@ const correctEmail = document.getElementById("correctEmail")
 const correctName = document.getElementById("correctName")
 const correctLastName = document.getElementById("correctLastName")
 const correctNumber = document.getElementById("correctNumber")
+const inCorrectImage = document.getElementById("inCorrectImage")
 
 const nextPageFromPrivate = document.getElementById("nextPageFromPrivate")
 
@@ -146,9 +147,11 @@ image.addEventListener('change', function(event){
     }
     if (event.target.files[0].type) {
         imageCheck = true
+        inCorrectImage.style.visibility = "hidden"
 
     } else {
         imageCheck = false
+        inCorrectImage.style.visibility = "visible"
     }
 
     
@@ -176,8 +179,8 @@ if(window.location.pathname === '/pages/experience.html'){
 if(window.location.pathname === '/pages/private.html'){
     resultName.innerHTML = info.name
     resultLastName.innerHTML = info.lastName
-    resultEmail.innerHTML = ` <i class="fa-solid fa-at"></i>  ${info.email}`
-    resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i> ${info.number}`
+    resultEmail.innerHTML = info.email
+    resultNumber.innerHTML = info.number
     resultAboutMe.innerHTML = info.aboutMe
 
     name.value = info.name
@@ -186,63 +189,46 @@ if(window.location.pathname === '/pages/private.html'){
     number.value = info.number
     aboutMe.value = info.aboutMe
     resultImage.appendChild(img)
-    // let regex = /^[\u10A0-\u10FF]+$/;
-    if(name.value === info.name){
-        nameCheck = true
+    if(info.email === null){
+       resultEmail.innerHTML = ""
+
+    }if(info.number === null){
+        resultNumber.innerHTML = ""
+    }
+    if(info.image === null){
+        resultImage.innerHTML = ""
+    }
+    if(resultName.innerHTML === nameLocalStorage){
         name.style.border = "1px solid #98E37E"
         correctName.style.visibility = "visible" 
+        nameCheck = true
+        name.value = nameLocalStorage
     }
-    if(name.value === ""){
-        nameCheck = false
-        name.style.border = "1px solid red"
-        correctName.style.visibility = "hidden" 
-    }
-
-    if(lastName.value = info.lastName){
-        lastNameCheck = true
+    if(resultLastName.innerHTML === lastNameLocalStorage){
         lastName.style.border = "1px solid #98E37E"
         correctLastName.style.visibility = "visible" 
+        lastNameCheck = true
+        lastName.value = lastNameLocalStorage
     }
-    if(lastName.value === ""){
-        lastNameCheck = false
-        lastName.style.border = "1px solid red"
-        correctLastName.style.visibility = "hidden" 
-    }
-    if(email.value = info.email && "@redberry.ge" === email.value.slice(-12)){
-        emailCheck = true
-        email.style.border = "1px solid #98E37E"  
+    if(resultEmail.innerHTML === emailLocalStorage ){
+        email.style.border = "1px solid #98E37E"
+        document.getElementById("emailTitle").style.color = "black"  
         correctEmail.style.visibility = "visible" 
         inCorrectEmail.style.visibility = 'hidden'
+        emailCheck = true
         email.value = emailLocalStorage
     }
-    if("@redberry.ge" !== email.value.slice(-12)){
-        emailCheck = false
-        email.style.border = "1px solid #EF5050"
-        document.getElementById("emailTitle").style.color = "#EF5050"  
-        inCorrectEmail.style.visibility = 'visible' 
-        correctEmail.style.visibility = "hidden" 
-        email.value = emailLocalStorage
-    }
-    let regex =  /^\+?(995|994)[0-9]{9}$/
-    if(number.value = info.number && regex.test(number.value)){
+    if(resultNumber.innerHTML === numberLocalStorage){
         number.style.border = "1px solid #98E37E"
         correctNumber.style.visibility = "visible" 
         numberCheck = true
-        number.value = numberLocalStorage
-    } if(!regex.test(number.value)){
-        correctNumber.style.visibility = "hidden"
-        number.style.border = "1px solid red"
-        numberCheck = false
-        number.value = numberLocalStorage
     }
-    if(imageLocalStorage){
+    if(resultImage.innerHTML === imageLocalStorage){
+        inCorrectImage.style.visibility = "hidden"
         imageCheck = true
-    } if(!imageLocalStorage){
-        imageCheck = false
     }
-
+    
 }
-
 nextPageFromPrivate.addEventListener('click', function(){
     if(!nameCheck){
         name.style.border = "1px solid red"
@@ -258,7 +244,7 @@ nextPageFromPrivate.addEventListener('click', function(){
             number.style.border = "1px solid red"
         }
     if(!imageCheck){
-        document.getElementById("uploadPictureTitle").style.color = "red"
+        inCorrectImage.style.visibility = "visible"
        }
 
   
@@ -268,7 +254,7 @@ nextPageFromPrivate.addEventListener('click', function(){
              window.location.href = '/pages/experience.html'
        }
 })
-
+console.log(info)
 // localStorage.removeItem("name")
 // localStorage.removeItem("lastName")
 // localStorage.removeItem("email")

@@ -87,6 +87,7 @@
     display: flex;
     justify-content: flex-start;
     margin-top: 35px;
+    position: relative;
 }
 .form-upload-picture input{
     margin-left: 10px;
@@ -229,6 +230,15 @@
     font-size: 20px;
     visibility: hidden;
     right: -27px;
+}
+#inCorrectImage{
+    position: absolute;
+    right: 53%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: red;
+    visibility: hidden;
 }
 #correctEmail, #correctName, #correctLastName, #correctNumber {
     color: #98E37E;
