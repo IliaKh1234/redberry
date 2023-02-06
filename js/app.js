@@ -143,10 +143,11 @@ aboutMe.addEventListener('keyup', function(event){
     let value = event.target.value
     if(aboutMe.value.length >= 1){
         document.getElementById("hiddenAboutMe").style.display = "block"
+        aboutMe.style.border = "1px solid #98E37E"
     }
     if(aboutMe.value.length === 0){
         document.getElementById("hiddenAboutMe").style.display = "none"
-
+        aboutMe.style.border = "1px solid gray"
     }
 
     localStorage.setItem("aboutMe", aboutMe.value) 
@@ -234,14 +235,16 @@ if(window.location.pathname === '/pages/private.html'){
         correctEmail.style.visibility = "visible" 
         inCorrectEmail.style.visibility = 'hidden'
         emailCheck = true
-        email.value = emailLocalStorage
+        email.value =  emailLocalStorage
+        resultEmail.innerHTML = `<i class="fa-solid fa-at"></i> ${emailLocalStorage}`
     }
     if(resultNumber.innerHTML === numberLocalStorage){
         number.style.border = "1px solid #98E37E"
         correctNumber.style.visibility = "visible" 
         numberCheck = true
+        resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i> ${numberLocalStorage}`
     }
-    if(document.getElementById("outPut").src === imageLocalStorage){
+    if(document.getElementById("outPut") && document.getElementById("outPut").src === imageLocalStorage){
         inCorrectImage.style.visibility = "hidden"
         imageCheck = true
     }
