@@ -206,6 +206,7 @@ if(window.location.pathname === '/pages/private.html'){
     number.value = info.number
     aboutMe.value = info.aboutMe
     resultImage.appendChild(img)
+    img.setAttribute("id", "outPut")
     if(info.email === null){
        resultEmail.innerHTML = ""
 
@@ -240,9 +241,13 @@ if(window.location.pathname === '/pages/private.html'){
         correctNumber.style.visibility = "visible" 
         numberCheck = true
     }
-    if(resultImage.innerHTML === imageLocalStorage){
+    if(document.getElementById("outPut").src === imageLocalStorage){
         inCorrectImage.style.visibility = "hidden"
         imageCheck = true
+    }
+    if(resultAboutMe.innerHTML === aboutMeLocalStorage){
+        document.getElementById("hiddenAboutMe").style.display = "block"
+        aboutMe.innerHTML = aboutMeLocalStorage
     }
     
 }
@@ -266,10 +271,8 @@ nextPageFromPrivate.addEventListener('click', function(){
     if(!imageCheck){
         inCorrectImage.style.visibility = "visible"
     }
-
-  
-    let output = document.getElementById('outPut')
-    output.src = URL.createObjectURL(image.files[0])
+    // let output = document.getElementById('outPut')
+    // output.src = URL.createObjectURL(image.files[0])
        if(nameCheck && lastNameCheck && emailCheck && numberCheck && imageCheck){
              window.location.href = '/pages/experience.html'
        }
