@@ -9,54 +9,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <section class="private-section">
-        <div class="private-info">
-            <header class="private-info-header">
-                <div class="private-info-head-parent">
-                    <h1>პირადი ინფო</h1>
-                    <h1>1/3</h1>
+    <section class="experience-section">
+        <i class="clearAll" class="fa-solid fa-chevron-left"></i>
+        <div class="experience-info">
+            <header class="experience-info-header">
+                <div class="experience-info-head-parent">
+                    <h1>გამოცდილება</h1>
+                    <h1>2/3</h1>
                 </div>
                 <hr>
             </header>
-                <form class="private-seciton-form" action="">
-                    <div class="form-names-parent" >
-                        <div class="form-name">
-                            <h3>სახელი</h3>
-                            <input type="text" id="name" placeholder="ანზორ">
-                            <i id="correctName" class="fa-solid fa-circle-check"></i>
-                            <p style="color: gray;">მინიმუმ 2 ასო, ქართული ასოები</p>
-                        </div>
-                        <div class="form-last-name">
-                            <h3>გვარი</h3>
-                            <input type="text" id="lastName" placeholder="მუმლაძე">
-                            <i id="correctLastName" class="fa-solid fa-circle-check"></i>
-                            <p style="color: gray;">მინიმუმ 2 ასო, ქართული ასოები</p>
-                        </div>
+            <form class="experience-section-form" action="">
+                <div class="position-parent">
+                    <h3>თანამდებობა</h3>
+                    <input id="position" type="text" placeholder="დეველოპერი, დიზაინერი, და ა.შ.">
+                    <p>მინიმუმ 2 სიმბოლო</p>
+                </div>
+                <div class="employer-parent" >
+                    <h3>დამსაქმებელი</h3>
+                    <input id="employer" type="text" placeholder="დამსაქმებელი">
+                    <p>მინიმუმ 2 სიმბოლო</p>
+                </div>
+                <div class="date-parent">
+                    <div class="start-date" >
+                        <h3>დაწყების რიცხვი</h3>
+                        <input id="startdate" type="date">
                     </div>
-                    <div class="form-upload-picture">
-                        <h3 id="uploadPictureTitle">პირადი ფოტოს ატვირთვა</h3>
-                        <input id="image" type="file">
+                    <div class="end-date" >
+                        <h3>დამთავრების რიცხვი</h3>
+                        <input id="endDate" type="date">
                     </div>
-                    <div class="form-about-me" >
-                        <h3>ჩემს შესახებ (არასავალდებულო)</h3>
-                        <textarea id="aboutMe" placeholder="ზოგადი ინფო შენ შესახებ"></textarea>
+                </div>
+                <div class="experience-about" >
+                    <h3>აღწერა</h3>
+                    <textarea id="experienceAbout" placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"></textarea>
+                </div>
+                <hr style="margin: 35px auto;">
+                <button id="addExperienceButton">მეტი გამოცდილების დამატება</button>
+            </form>
+                <div class="btn-from-experience-btn">
+                    <div class="next-from-experience">
+                        <a id="nextPageFromExperience" href="#">შემდეგი</a>
                     </div>
-                    <div class="form-email">
-                        <h3 id="emailTitle">ელ.ფოსტა</h3>
-                        <input id="email" type="email" placeholder="anzor666@redberry.com">
-                        <i id="inCorrectEmail" class="fa-solid fa-triangle-exclamation"></i>
-                        <i id="correctEmail" class="fa-solid fa-circle-check"></i>
-                        <p style="color: gray;">უნდა მთავრდებოდეს @redberry.ge-ით</p>
+                    <div class="back-from-experience" >
+                        <a id="backPageFromExperience" href="#">უკან</a>
                     </div>
-                    <div class="form-number">
-                        <h3>მობილურის ნომერი</h3>
-                        <input id="phone" type="text" placeholder="+995 551 12 34 56">
-                        <i id="correctNumber" class="fa-solid fa-circle-check"></i>
-                        <p style="color: gray;">უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს</p>
-                    </div>
-                </form>
-                <div class="next-from-private-btn">
-                    <a id="nextPageFromPrivate" href="#">შემდეგი</a>
                 </div>
         </div>
         <div class="private-info-result">
@@ -79,7 +76,8 @@
                     
                 </div>
                 <div class="profile-parent"></div>
-            </div>      
+            </div> 
+            <hr style="width: 87%; margin: 60px auto;">     
         </div>
     </section>
     <script src="../js/app.js"></script>

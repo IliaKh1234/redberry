@@ -9,8 +9,8 @@
     text-decoration: none;
     box-sizing: border-box;
     font-family: 'HelveticaNeue';
-  }
-  
+}
+
 .container {
     width: 100%;
     margin: 0 auto;
@@ -69,6 +69,9 @@
 .private-info-header{
     width: 80%;
     margin: auto;
+}
+.private-info-result{
+   width: 40%;
 }
 .private-info-head-parent{
     display: flex;
@@ -288,4 +291,134 @@
     position: absolute;
     bottom: 3%;
     left: 62%;
+}
+/* private page */
+
+.experience-section{
+    display: flex;
+}
+.experience-info{
+    width: 60%;
+    background: #F9F9F9;
+    padding-top: 30px;
+    height: 100vh;
+    overflow-y: scroll;
+}
+.experience-info::-webkit-scrollbar{
+    width: 3px;
+  
+}
+.experience-info::-webkit-scrollbar-thumb{
+    background: rgb(182, 182, 182);
+    border-radius: 20px;
+}
+.experience-info-header{
+    width: 80%;
+    margin: auto;
+}
+.experience-section-form{
+    max-width: 80%;
+    margin: auto;
+}
+#position{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px;
+    margin: 7px 0;
+    width: 100%;
+}
+.position-parent{
+    position: relative;
+}
+.position-parent p{
+    color: gray;
+}
+.experience-section-form{
+    padding-top: 35px;
+}
+#employer{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px;
+    margin: 7px 0;
+    width: 100%;
+}
+.employer-parent{
+    margin-top: 35px;
+    position: relative;
+}
+.position-parent p{
+    color: gray;
+}
+.date-parent{
+    display: flex;
+    margin-top: 35px;
+    justify-content: space-between;
+}
+.start-date{
+    position: relative;
+    width: 35%;
+}
+#startdate{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 8px 24px 8px 24px;
+    margin: 7px 0;
+    width: 100%;
+}
+.end-date{
+    position: relative;
+    width: 35%;
+}
+#endDate{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 8px 24px 8px 24px;
+    margin: 7px 0;
+    width: 100%;
+}
+.experience-about{
+    position: relative;
+    margin-top: 35px;
+}
+#experienceAbout{
+    width: 100%;
+    padding-bottom: 5rem;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 7px;
+    resize: none;
+}
+#addExperienceButton{
+    background: #62A1EB;
+    padding: 18px 60px 18px 60px;
+    outline: none;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    
+}
+
+.btn-from-experience-btn{
+    display: flex;
+    justify-content: space-between;
+    max-width: 80%;
+    margin: auto;
+    transform: translateY(20vh);
+}
+
+.btn-from-experience-btn a{
+    background: #6B40E3;
+    padding: 18px 60px 18px 60px;
+    outline: none;
+    color: white;
+    border: none;
+    border-radius: 4px;
 }
