@@ -12,8 +12,6 @@ const resultNumber = document.getElementById("resultNumber")
 const resultAboutMe = document.getElementById("resultAboutMe")
 const resultImage = document.querySelector(".profile-parent")
 
-let output = document.getElementById('outPut')
-
 const inCorrectEmail = document.getElementById("inCorrectEmail")
 const correctEmail = document.getElementById("correctEmail")
 const correctName = document.getElementById("correctName")
@@ -26,26 +24,18 @@ const inCorrectNumber = document.getElementById("inCorrectNumber")
 
 const nextPageFromPrivate = document.getElementById("nextPageFromPrivate")
 
-let url = localStorage.getItem("image")
-let img = new Image
-img.src = url
-
-let nameLocalStorage = localStorage.getItem("name")
-let lastNameLocalStorage = localStorage.getItem("lastName")
-let emailLocalStorage = localStorage.getItem("email")
-let numberLocalStorage = localStorage.getItem("number")
-let aboutMeLocalStorage = localStorage.getItem("aboutMe")
-let imageLocalStorage = localStorage.getItem("image")
-
 const info = {
-    name: nameLocalStorage,
-    lastName: lastNameLocalStorage,
-    email: emailLocalStorage,
-    number: numberLocalStorage,
-    aboutMe: aboutMeLocalStorage,
-    image: imageLocalStorage
+    name: localStorage.getItem("name"),
+    lastName: localStorage.getItem("lastName"),
+    email: localStorage.getItem("email"),
+    number: localStorage.getItem("number"),
+    aboutMe: localStorage.getItem("aboutMe"),
+    image: localStorage.getItem("image")
 }
 
+let url = info.image
+let img = new Image
+img.src = url
 
 let nameCheck = false
 let lastNameCheck = false
@@ -208,6 +198,7 @@ if(window.location.pathname === '/pages/private.html'){
     aboutMe.value = info.aboutMe
     resultImage.appendChild(img)
     img.setAttribute("id", "outPut")
+    
     if(info.email === null){
        resultEmail.innerHTML = ""
 
@@ -217,40 +208,40 @@ if(window.location.pathname === '/pages/private.html'){
     if(info.image === null){
         resultImage.innerHTML = ""
     }
-    if(resultName.innerHTML === nameLocalStorage){
+    if(resultName.innerHTML === info.name){
         name.style.border = "1px solid #98E37E"
         correctName.style.visibility = "visible" 
         nameCheck = true
-        name.value = nameLocalStorage
+        name.value = info.name
     }
-    if(resultLastName.innerHTML === lastNameLocalStorage){
+    if(resultLastName.innerHTML === info.lastName){
         lastName.style.border = "1px solid #98E37E"
         correctLastName.style.visibility = "visible" 
         lastNameCheck = true
-        lastName.value = lastNameLocalStorage
+        lastName.value = info.lastName
     }
-    if(resultEmail.innerHTML === emailLocalStorage ){
+    if(resultEmail.innerHTML === info.email ){
         email.style.border = "1px solid #98E37E"
         document.getElementById("emailTitle").style.color = "black"  
         correctEmail.style.visibility = "visible" 
         inCorrectEmail.style.visibility = 'hidden'
         emailCheck = true
-        email.value =  emailLocalStorage
-        resultEmail.innerHTML = `<i class="fa-solid fa-at"></i> ${emailLocalStorage}`
+        email.value = info.email
+        resultEmail.innerHTML = `<i class="fa-solid fa-at"></i> ${info.email}`
     }
-    if(resultNumber.innerHTML === numberLocalStorage){
+    if(resultNumber.innerHTML === info.number){
         number.style.border = "1px solid #98E37E"
         correctNumber.style.visibility = "visible" 
         numberCheck = true
-        resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i> ${numberLocalStorage}`
+        resultNumber.innerHTML = `<i class="fa-solid fa-phone phone"></i> ${info.number}`
     }
-    if(document.getElementById("outPut") && document.getElementById("outPut").src === imageLocalStorage){
+    if(document.getElementById("outPut") && document.getElementById("outPut").src === info.image){
         inCorrectImage.style.visibility = "hidden"
         imageCheck = true
     }
-    if(resultAboutMe.innerHTML === aboutMeLocalStorage){
+    if(resultAboutMe.innerHTML === info.aboutMe){
         document.getElementById("hiddenAboutMe").style.display = "block"
-        aboutMe.innerHTML = aboutMeLocalStorage
+        aboutMe.innerHTML = info.aboutMe
     }
     
 }
@@ -274,9 +265,7 @@ nextPageFromPrivate.addEventListener('click', function(){
     if(!imageCheck){
         inCorrectImage.style.visibility = "visible"
     }
-    // let output = document.getElementById('outPut')
-    // output.src = URL.createObjectURL(image.files[0])
-       if(nameCheck && lastNameCheck && emailCheck && numberCheck && imageCheck){
-             window.location.href = '/pages/experience.html'
-       }
+   if(nameCheck && lastNameCheck && emailCheck && numberCheck && imageCheck){
+         window.location.href = '/pages/experience.html'
+    }
 })
