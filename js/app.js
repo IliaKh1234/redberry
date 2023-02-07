@@ -43,7 +43,7 @@ let emailCheck = false
 let numberCheck = false
 let imageCheck = false
 
-const clearAll = document.getElementById("clearAll")
+const clearAll = document.querySelector("clearAll")
 
 if(clearAll){
     clearAll.addEventListener("click", function(){
