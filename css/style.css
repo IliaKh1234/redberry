@@ -331,7 +331,7 @@
 .position-parent{
     position: relative;
 }
-.position-parent p{
+.experience-section-form p{
     color: gray;
 }
 .experience-section-form{
@@ -361,7 +361,7 @@
     position: relative;
     width: 35%;
 }
-#startdate{
+#startDate{
     border-radius: 3px;
     outline: none;
     border: 1px solid #B8B8B8;
@@ -445,4 +445,47 @@
     line-height: 22px;
     font-weight: 400;
     margin-top: 15px;
+}
+
+#correctPosition{
+    position: absolute;
+    font-size: 20px;
+    color: #98E37E;
+    right: 10px;
+    top: 30%;
+    transform: translateY(50%);
+    visibility: hidden;
+}
+#inCorrectPosition{
+    position: absolute;
+    font-size: 20px;
+    color: red;
+    right: -30px;
+    top: 30%;
+    transform: translateY(50%);
+    visibility: hidden;
+}
+#correctEmployer{
+    position: absolute;
+    font-size: 20px;
+    color: #98E37E;
+    right: 10px;
+    top: 30%;
+    transform: translateY(50%);
+    visibility: hidden;
+}
+#inCorrectEmployer{
+    position: absolute;
+    font-size: 20px;
+    color: red;
+    right: -30px;
+    top: 30%;
+    transform: translateY(50%);
+    visibility: hidden;
+}
+#experienceTitle{
+    display: none;
+}
+#dateLine, #dot{
+    display: none;
 }
