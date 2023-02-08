@@ -141,11 +141,11 @@ if(window.location.pathname === '/pages/experience.html'){
     }
 }
 let counter = 0
+let experienceArr = []
 addExperienceBtn.addEventListener("click", function(e){
     e.preventDefault()
-    let experienceArr = []
     counter++
-
+    
     let experienceObj = { 
         position: {
             value:"",
