@@ -12,6 +12,8 @@ const startDateResult = document.getElementById("startDateResult")
 const endDateResult = document.getElementById("endDateResult")
 const aboutExperienceResult = document.getElementById("aboutExperienceResult")
 
+const addExperienceBtn = document.getElementById("addExperienceButton")
+
 const correctPosition = document.getElementById("correctPosition")
 const correctEmployer = document.getElementById("correctEmployer")
 
@@ -138,9 +140,94 @@ if(window.location.pathname === '/pages/experience.html'){
         aboutExperience.value = experienceInfo.aboutExperience
     }
 }
+let counter = 0
+addExperienceBtn.addEventListener("click", function(e){
+    e.preventDefault()
+    let experienceArr = []
+    counter++
+
+    let experienceObj = { 
+        position: {
+            value:"",
+            placeHolder:'დეველოპერი, დიზაინერი, და ა.შ.',
+            title: 'თანამდებობა',
+            element: `<input type='text' onchange="handleChange(e)"/>`
+        },
+        employer:{
+            value:"",
+            placeHolder:'დამსაქმებელი',
+            title: 'დამსაქმებელი',
+            element: `<input type='text' onchange="handleChange(e)"/>`
+        },
+        startDate:{
+            value:'',
+            title: 'დაწყების რიცხვი',
+        },
+        endDate:{
+            value: '',
+            title: 'დამთავრების რიცხვი',
+        },
+        about:{
+            value:'',
+            title: 'აღწერა',
+            placeHolder: 'როლი თანამდებობაზე და ზოგადი აღწერა'
+        }
+    
+    }
+   
+        experienceArr.push(experienceObj);
+        //clean experience object;
+        document.querySelector(".add-experience-form").innerHTML += 
+        `
+        <div class="position-parent">
+        <h3>${experienceArr[0].position.title}</h3>
+        <input class="position-${counter}" id="position" type="text" placeholder="${experienceArr[0].position.placeHolder}"> 
+        <p>მინიმუმ 2 სიმბოლო</p>
+    </div>
+    <div class="employer-parent" >
+        <h3>${experienceArr[0].employer.title}</h3>
+        <input class="employer-${counter}" id="employer" type="text" placeholder="${experienceArr[0].employer.placeHolder} ">
+        <p>მინიმუმ 2 სიმბოლო</p>
+    </div>
+    <div class="date-parent">
+        <div class="start-date" >
+            <h3>${experienceArr[0].startDate.title}</h3>
+            <input onchange="startDateFunc()" class="startDate-${counter}" id="startDate" type="date">
+        </div>
+        <div class="end-date" >
+            <h3>${experienceArr[0].endDate.title}</h3>
+            <input onchange="endDateFunc()" class="endDate-${counter}" id="endDate" type="date">
+        </div>
+    </div>
+    <div class="experience-about" >
+        <h3>${experienceArr[0].about.title}</h3>
+        <textarea class="experienceAbout-${counter}" id="experienceAbout" placeholder="${experienceArr[0].about.placeHolder}"></textarea>
+    </div>
+    <hr style="margin: 35px auto;">
+</form>
+        `
+        
+        console.log(experienceArr[0])
+        console.log(counter)
+})
 
 // localStorage.removeItem("position")
 // localStorage.removeItem("employer")
 // localStorage.removeItem("startdate")
 // localStorage.removeItem("endDate")
 // localStorage.removeItem("aboutExperience")
+
+// <h3 id="experienceTitle" style="color: #F93B1D;">გამოცდილება</h3>
+// <div class="position-employer-result" >
+//     <h4 id="experienceResult" > </h4>
+//     <h4 id="dot">,</h4> &nbsp;
+//     <h4 id="employerResult" > </h4>
+// </div> 
+// <div class="date-result" >
+//     <p id="startDateResult"> </p> &nbsp; 
+//     <p id="dateLine" >-</p> &nbsp;
+//     <p id="endDateResult"> </p>
+// </div>
+// <div class="experience-result" >
+//     <p id="aboutExperienceResult" > </p>
+// </div>

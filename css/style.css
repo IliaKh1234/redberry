@@ -489,3 +489,6 @@
 #dateLine, #dot{
     display: none;
 }
+.add-experience-form{
+    margin-top: 35px;
+}
