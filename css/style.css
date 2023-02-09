@@ -334,9 +334,6 @@
 .experience-section-form p{
     color: gray;
 }
-.experience-section-form{
-    padding-top: 35px;
-}
 #employer{
     border-radius: 3px;
     outline: none;
@@ -404,6 +401,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 25px;
 }
 
 .btn-from-experience-btn{
