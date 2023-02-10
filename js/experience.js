@@ -25,122 +25,17 @@ let positionCheck = false
 let employerCheck = false
 let startDateCheck = false
 let endDateCheck = false
+let aboutCheck = false
 const EXPERIENCES_KEY = 'experiences'
-const experienceInfo = {
-    position: localStorage.getItem("position"),
-    employer: localStorage.getItem("employer"),
-    startDate: localStorage.getItem("startDate"),
-    endDate: localStorage.getItem("endDate"),
-    aboutExperience: localStorage.getItem("aboutExperience")
-}
-
-position.addEventListener("keyup", (event) => {
-    let value = event.target.value
-
-    if (value.length >= 2) {
-        position.style.border = "1px solid #98E37E"
-        correctPosition.style.visibility = "visible"
-        inCorrectPosition.style.visibility = "hidden"
-        positionCheck = true
-    } else {
-        position.style.border = "1px solid red"
-        inCorrectPosition.style.visibility = "visible"
-        correctPosition.style.visibility = "hidden"
-        positionCheck = false
-    }
-    localStorage.setItem("position", value)
-    experienceResult.innerHTML = value
-    experienceTitle.style.display = 'block'
-})
-
-employer.addEventListener("keyup", (event) => {
-    let value = event.target.value
-    if (value.length >= 2) {
-        employer.style.border = "1px solid #98E37E"
-        correctEmployer.style.visibility = "visible"
-        inCorrectEmployer.style.visibility = "hidden"
-        employerCheck = true
-    } else {
-        employer.style.border = "1px solid red"
-        inCorrectEmployer.style.visibility = "visible"
-        correctEmployer.style.visibility = "hidden"
-        employerCheck = false
-    }
-    localStorage.setItem("employer", value)
-    employerResult.innerHTML = `, ${value}`
-    experienceTitle.style.display = 'block'
-})
-
-const startDateFunc = () => {
-    startDate.style.border = "1px solid #98E37E"
-    localStorage.setItem("startDate", startDate.value)
-    startDateResult.innerHTML = startDate.value
-    experienceTitle.style.display = 'block'
-}
-
-const endDateFunc = () => {
-    endDate.style.border = "1px solid #98E37E"
-    localStorage.setItem("endDate", endDate.value)
-    endDateResult.innerHTML = `- ${endDate.value}`
-    experienceTitle.style.display = 'block'
-}
-
-aboutExperience.addEventListener("keyup", (event) => {
-    let value = event.target.value
-
-    if (value.length > 0) {
-        aboutExperience.style.border = "1px solid #98E37E"
-    } else {
-        aboutExperience.style.border = "1px solid gray"
-    }
-    localStorage.setItem("aboutExperience", value)
-    aboutExperienceResult.innerHTML = value
-    experienceTitle.style.display = 'block'
-})
+let counter = 0
+let experiencesStore = {}
 
 if (window.location.pathname === '/pages/experience.html') {
-    experienceResult.innerHTML = experienceInfo.position
-    employerResult.innerHTML = experienceInfo.employer
-    startDateResult.innerHTML = experienceInfo.startDate
-    endDateResult.innerHTML = experienceInfo.endDate
-    aboutExperienceResult.innerHTML = experienceInfo.aboutExperience
-
-    document.getElementById("dateLine").style.display = "block"
-    document.getElementById("dot").style.display = "block"
-
-    position.value = experienceInfo.position
-    employer.value = experienceInfo.employer
-    startDate.value = experienceInfo.startDate
-    endDate.value = experienceInfo.endDate
-    aboutExperience.value = experienceInfo.aboutExperience
-
-    if (experienceResult.innerHTML === experienceInfo.position) {
-        position.style.border = "1px solid #98E37E"
-        correctPosition.style.visibility = "visible"
-        positionCheck = true
-        position.value = experienceInfo.position
-    }
-    if (employerResult.innerHTML === experienceInfo.employer) {
-        employer.style.border = "1px solid #98E37E"
-        correctEmployer.style.visibility = "visible"
-        employerCheck = true
-        employer.value = experienceInfo.employer
-    }
-    if (startDateResult.innerHTML === experienceInfo.startDate) {
-        startDate.style.border = "1px solid #98E37E"
-        startDateCheck = true
-        startDate.value = experienceInfo.startDate
-    }
-    if (endDateResult.innerHTML === experienceInfo.endDate) {
-        endDate.style.border = "1px solid #98E37E"
-        endDateCheck = true
-        endDate.value = experienceInfo.endDate
-    }
-    if (aboutExperienceResult.innerHTML === experienceInfo.aboutExperience) {
-        aboutExperience.style.border = "1px solid #98E37E"
-        aboutExperience.value = experienceInfo.aboutExperience
-    }
-
+    experienceResult.innerHTML = experiencesStore.position
+    // employerResult.innerHTML = experienceInfo.employer
+    // startDateResult.innerHTML = experienceInfo.startDate
+    // endDateResult.innerHTML = experienceInfo.endDate
+    // aboutExperienceResult.innerHTML = experienceInfo.aboutExperience
 }
 
 function createExperience(){
@@ -172,8 +67,6 @@ return {
 }
 }
 
-let counter = 0
-let experiencesStore = {}
 
 initExperienceStore()
 
@@ -207,6 +100,12 @@ function renderExperiences(e) {
 function renderExperiencesTemplate(){
     Object.keys(experiencesStore).forEach(key => {
         experiencesContainer.innerHTML  += experienceTemplate(experiencesStore[key], key)
+
+        experienceResult.innerHTML = experiencesStore[key].position.value
+        employerResult.innerHTML = experiencesStore[key].employer.value
+        startDateResult.innerHTML = experiencesStore[key].startDate.value
+        endDateResult.innerHTML = experiencesStore[key].endDate.value
+        aboutExperienceResult.innerHTML = experiencesStore[key].about.value
 })
 
 }
@@ -214,14 +113,50 @@ function renderExperiencesTemplate(){
 function clearExperiencesUI(){
     experiencesContainer.innerHTML = ''
 }
-function createDiv () {
-    return document.createElement('div')
-}
+
 function handleChange(e, targetKey, key ){
     
     experiencesStore[key][targetKey].value = e.target.value;
     
     setItemToLocalStorage(EXPERIENCES_KEY, experiencesStore)
+
+    let value = e.target.value
+    
+    if (value.length >= 2) {
+        e.target.style.border = "1px solid #98E37E"
+        
+    }else {
+        e.target.style.border = "1px solid red"
+        positionCheck = false
+    }if(targetKey === "position"){
+        experienceResult.innerHTML = value
+        positionCheck = true
+    }else{
+        positionCheck = false
+    }if(targetKey === "employer"){
+        employerResult.innerHTML = value
+        employerCheck = true
+    }else{
+        employerCheck = false
+    }if(targetKey === "startDate"){
+        startDateResult.innerHTML = value
+        startDateCheck = true
+    }else{
+        startDateCheck = false
+    }if(targetKey === "endDate"){
+        endDateResult.innerHTML = value
+        endDateCheck = true
+    }else{
+        endDateCheck = false
+    }if(targetKey === "about"){
+        aboutExperienceResult.innerHTML = value
+        aboutCheck = true
+    }else{
+        aboutCheck = false
+    }
+    experienceTitle.style.display = 'block'
+    document.getElementById("dateLine").style.display = "block"
+    document.getElementById("dot").style.display = "block"
 }
 
 function setItemToLocalStorage(key){
@@ -244,9 +179,8 @@ function experienceTemplate(experience, key) {
              type="text"
              value="${experience.position.value}"
              placeholder="${experience.position.placeHolder}"
-            onchange="handleChange(event, 'position', ${key})"
+            oninput="handleChange(event, 'position', ${key})"
              >
-
             <p>მინიმუმ 2 სიმბოლო</p>
             </div>
             <div class="employer-parent" >
@@ -257,7 +191,7 @@ function experienceTemplate(experience, key) {
             type="text"
             value="${experience.employer.value}"
              placeholder="${experience.employer.placeHolder} "
-             onchange="handleChange(event, 'employer', ${key})"
+             oninput="handleChange(event, 'employer', ${key})"
              >
             <p>მინიმუმ 2 სიმბოლო</p>
             </div>
@@ -266,25 +200,26 @@ function experienceTemplate(experience, key) {
                 <h3>${experience.startDate.title}</h3>
                 <input 
                 value="${experience.startDate.value}"
-                onchange="handleChange(event, 'startDate', ${key})" class="startDate-${counter}" id="startDate" type="date">
+                oninput="handleChange(event, 'startDate', ${key})" class="startDate-${counter}" id="startDate" type="date">
             </div>
             <div class="end-date" >
                 <h3>${experience.endDate.title}</h3>
                 <input 
                 value="${experience.endDate.value}"
-                onchange="handleChange(event, 'endDate', ${key})" class="endDate-${counter}" id="endDate" type="date">
+                oninput="handleChange(event, 'endDate', ${key})" class="endDate-${counter}" id="endDate" type="date">
             </div>
             </div>
             <div class="experience-about" >
             <h3>${experience.about.title}</h3>
             <textarea 
             value="${experience.about.value}"
-            onchange="handleChange(event, 'about', ${key})"
+            oninput="handleChange(event, 'about', ${key})"
             class="experienceAbout-${counter}" id="experienceAbout" placeholder="${experience.about.placeHolder}">
             ${experience.about.value}
             </textarea>
             </div>
             <hr style="margin-top:25px" />
+            
 </div>
 `
 }
