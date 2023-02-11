@@ -6,6 +6,7 @@ const endDate = document.getElementById("endDate")
 
 const experienceTitle = document.getElementById("experienceTitle")
 const experiencesContainer = document.querySelector(".add-experience-form");
+const experienceResultParent = document.querySelector(".experience-result-parent")
 
 const experienceResult = document.getElementById("experienceResult")
 const employerResult = document.getElementById("employerResult")
@@ -36,6 +37,10 @@ if (window.location.pathname === '/pages/experience.html') {
     // startDateResult.innerHTML = experienceInfo.startDate
     // endDateResult.innerHTML = experienceInfo.endDate
     // aboutExperienceResult.innerHTML = experienceInfo.aboutExperience
+}
+
+const shouldRenderExperience = (experience) =>{
+    return Object.values(experience).some(item => item.value.length)
 }
 
 function createExperience(){
@@ -81,21 +86,48 @@ if(Object.keys(experiencesStore).length){
     renderExperiences()
 }
 
+
 function initExperienceStore(){
     const experiences = getItemFromLocalStorage(EXPERIENCES_KEY);
     if(experiences) {
         experiencesStore = {...experiences}}
 
     
-}
-addExperienceBtn.addEventListener("click",renderExperiences)
-function renderExperiences(e) {
+    }
+    addExperienceBtn.addEventListener("click",renderExperiences)
+    function renderExperiences(e) {
     e?.preventDefault();
     experiencesStore[id] = {...createExperience()};
     id++;
+    counter++
     clearExperiencesUI()
     renderExperiencesTemplate()
+    renderResume()
+    
 }
+
+function renderResume(){
+    Object.keys(experiencesStore).forEach(key =>{
+        if(shouldRenderExperience(experiencesStore[key])){
+            document.querySelector(".experience-result-parent").innerHTML += `
+            <div class="${key}" >
+            <h4 id="experienceResult-${key}" > </h4>
+            <h4 id="dot">,</h4> &nbsp;
+            <h4 id="employerResult" > </h4>
+        </div> 
+        <div class="date-result" >
+            <p id="startDateResult"> </p> &nbsp; 
+            <p id="dateLine" >-</p> &nbsp;
+            <p id="endDateResult"> </p>
+        </div>
+        <div class="experience-result" >
+            <p id="aboutExperienceResult" > </p>
+        </div>`
+        }
+        console.log(document.getElementById(`experienceResult-${key}`))
+    })
+}
+
 
 function renderExperiencesTemplate(){
     Object.keys(experiencesStore).forEach(key => {
@@ -106,16 +138,17 @@ function renderExperiencesTemplate(){
         startDateResult.innerHTML = experiencesStore[key].startDate.value
         endDateResult.innerHTML = experiencesStore[key].endDate.value
         aboutExperienceResult.innerHTML = experiencesStore[key].about.value
+        
 })
-
 }
 
 function clearExperiencesUI(){
     experiencesContainer.innerHTML = ''
+    experienceResultParent.innerHTML = ''
 }
 
 function handleChange(e, targetKey, key ){
-    
+
     experiencesStore[key][targetKey].value = e.target.value;
     
     setItemToLocalStorage(EXPERIENCES_KEY, experiencesStore)
@@ -129,7 +162,7 @@ function handleChange(e, targetKey, key ){
         e.target.style.border = "1px solid red"
         positionCheck = false
     }if(targetKey === "position"){
-        experienceResult.innerHTML = value
+        // document.getElementById(`experienceResult${key}`).innerHTML = value
         positionCheck = true
     }else{
         positionCheck = false
@@ -155,8 +188,6 @@ function handleChange(e, targetKey, key ){
         aboutCheck = false
     }
     experienceTitle.style.display = 'block'
-    document.getElementById("dateLine").style.display = "block"
-    document.getElementById("dot").style.display = "block"
 }
 
 function setItemToLocalStorage(key){
