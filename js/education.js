@@ -120,7 +120,7 @@ function educationTemplate(education, key){
         <div class="grade-parent" >
             <h4>${education.grade.title}</h4>
             <select onchange="handleChange(event, 'grade', ${key})" id="grade">
-                <option value="test">test</option>
+                <option>აირჩიეთ ხარისხი</option>
             </select>
         </div>
         <div class="education-end-date" >
@@ -142,3 +142,11 @@ function educationTemplate(education, key){
         `
 }
 
+let grade = document.getElementById("grade")
+fetch("https://resume.redberryinternship.ge/api/degrees")
+  .then(res => res.json())
+  .then(data => {
+    for(let i = 0; i < data.length; i++){
+        grade.innerHTML += `<option>${data[i].title}</option>`
+    }
+})
