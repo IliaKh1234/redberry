@@ -1,4 +1,5 @@
 const educationsContainer = document.querySelector(".education-section-form")
+const addInstituteBtn = document.getElementById("addInstituteBtn")
 
 const EDUCATION_KEY = 'educations'
 let educationStore = {}
@@ -26,7 +27,7 @@ function createEducation() {
         }
     }
 }
-
+renderEducations
 function getId(){
     return Object.keys(educationStore).length
 }
@@ -37,20 +38,32 @@ if(Object.keys(educationStore).length){
     renderEducations()
 }
 
+function initEducationStore() {
+    const educations = getItemFromLocalStorage(EDUCATION_KEY)
+    if (educations) {
+        educationStore = { ...educations }
+    }
+}
+
+addInstituteBtn.addEventListener("click", renderEducations)
+
 function renderEducations(e){
     e?.preventDefault();
     educationStore[id] = { ...createEducation() }
     id++;
+    clearEducationsUI()
     renderEducationsTemplate()
 
 }
 
-
+function clearEducationsUI() {
+    educationsContainer.innerHTML = ''
+}
 
 function handleChange(e, targetKey, key){
     const { value } = e.target
     educationStore[key][targetKey].value = value
-    
+    setItemToLocalStorage(EDUCATION_KEY, educationStore)
 }
 
 function renderEducationsTemplate(){
@@ -59,6 +72,13 @@ function renderEducationsTemplate(){
     })
 }
 
+function setItemToLocalStorage(key) {
+    localStorage.setItem(key, JSON.stringify(educationStore))
+}
+function getItemFromLocalStorage(key) {
+    let item = localStorage.getItem(key)
+    return item ? JSON.parse(item) : null
+}
 function educationTemplate(education, key){
     return `
     <div class='education-${key}'>

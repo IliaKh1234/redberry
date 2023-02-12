@@ -517,6 +517,9 @@
     color: gray;
     font-size: 14px;
 }
+.institute-parent{
+    margin-top: 35px;
+}
 .grade-date-parent{
     margin-top: 55px;
     display: flex;
