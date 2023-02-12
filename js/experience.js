@@ -4,23 +4,14 @@ const aboutExperience = document.getElementById("experienceAbout")
 const startDate = document.getElementById("startDate")
 const endDate = document.getElementById("endDate")
 
+const resumeContainer = document.getElementById("resume")
 const experienceTitle = document.getElementById("experienceTitle")
 const experiencesContainer = document.querySelector(".add-experience-form");
 const experienceResultParent = document.querySelector(".experience-result-parent")
 
-const experienceResult = document.getElementById("experienceResult")
-const employerResult = document.getElementById("employerResult")
-const startDateResult = document.getElementById("startDateResult")
-const endDateResult = document.getElementById("endDateResult")
-const aboutExperienceResult = document.getElementById("aboutExperienceResult")
+const nextBtn = document.getElementById("nextPageFromExperience")
 
 const addExperienceBtn = document.getElementById("addExperienceButton")
-
-const correctPosition = document.getElementById("correctPosition")
-const correctEmployer = document.getElementById("correctEmployer")
-
-const inCorrectPosition = document.getElementById("inCorrectPosition")
-const inCorrectEmployer = document.getElementById("inCorrectEmployer")
 
 let positionCheck = false
 let employerCheck = false
@@ -31,171 +22,190 @@ const EXPERIENCES_KEY = 'experiences'
 let counter = 0
 let experiencesStore = {}
 
-if (window.location.pathname === '/pages/experience.html') {
-    experienceResult.innerHTML = experiencesStore.position
-    // employerResult.innerHTML = experienceInfo.employer
-    // startDateResult.innerHTML = experienceInfo.startDate
-    // endDateResult.innerHTML = experienceInfo.endDate
-    // aboutExperienceResult.innerHTML = experienceInfo.aboutExperience
-}
 
-const shouldRenderExperience = (experience) =>{
+
+const shouldRenderExperience = (experience) => {
+
     return Object.values(experience).some(item => item.value.length)
 }
 
-function createExperience(){
-return {
-    position: {
-        value: "",
-        placeHolder: 'დეველოპერი, დიზაინერი, და ა.შ.',
-        title: 'თანამდებობა',
-    },
-    employer: {
-        value: "",
-        placeHolder: 'დამსაქმებელი',
-        title: 'დამსაქმებელი',
-    },
-    startDate: {
-        value: '',
-        title: 'დაწყების რიცხვი',
-    },
-    endDate: {
-        value: '',
-        title: 'დამთავრების რიცხვი',
-    },
-    about: {
-        value: '',
-        title: 'აღწერა',
-        placeHolder: 'როლი თანამდებობაზე და ზოგადი აღწერა'
-    }
+function createExperience() {
+    return {
+        position: {
+            value: "",
+            placeHolder: 'დეველოპერი, დიზაინერი, და ა.შ.',
+            title: 'თანამდებობა',
+        },
+        employer: {
+            value: "",
+            placeHolder: 'დამსაქმებელი',
+            title: 'დამსაქმებელი',
+        },
+        startDate: {
+            value: '',
+            title: 'დაწყების რიცხვი',
+        },
+        endDate: {
+            value: '',
+            title: 'დამთავრების რიცხვი',
+        },
+        about: {
+            value: '',
+            title: 'აღწერა',
+            placeHolder: 'როლი თანამდებობაზე და ზოგადი აღწერა'
+        }
 
-}
+    }
 }
 
 
 initExperienceStore()
-
-function getId(){
- return Object.keys(experiencesStore).length
+renderResume()
+function getId() {
+    return Object.keys(experiencesStore).length
 }
 
 let id = getId();
-if(Object.keys(experiencesStore).length){
+if (Object.keys(experiencesStore).length) {
     renderExperiencesTemplate()
-}else{
+} else {
     renderExperiences()
 }
 
 
-function initExperienceStore(){
+function initExperienceStore() {
     const experiences = getItemFromLocalStorage(EXPERIENCES_KEY);
-    if(experiences) {
-        experiencesStore = {...experiences}}
-
-    
+    if (experiences) {
+        experiencesStore = { ...experiences }
     }
-    addExperienceBtn.addEventListener("click",renderExperiences)
-    function renderExperiences(e) {
+
+
+}
+addExperienceBtn.addEventListener("click", renderExperiences)
+
+function renderExperiences(e) {
     e?.preventDefault();
-    experiencesStore[id] = {...createExperience()};
+    experiencesStore[id] = { ...createExperience() };
     id++;
-    counter++
     clearExperiencesUI()
     renderExperiencesTemplate()
+    clearRenderResume()
     renderResume()
-    
+}
+function clearRenderResume() {
+    resumeContainer.innerHTML = ""
+}
+function renderResume() {
+    Object.keys(experiencesStore).forEach(key => {
+        if (shouldRenderExperience(experiencesStore[key])) {
+            document.querySelector("#resume").append(
+                createRenderResumeTemplate(key, experiencesStore[key])
+                ) 
+            }
+        })
 }
 
-function renderResume(){
-    Object.keys(experiencesStore).forEach(key =>{
-        if(shouldRenderExperience(experiencesStore[key])){
-            document.querySelector(".experience-result-parent").innerHTML += `
-            <div class="${key}" >
-            <h4 id="experienceResult-${key}" > </h4>
-            <h4 id="dot">,</h4> &nbsp;
-            <h4 id="employerResult" > </h4>
-        </div> 
-        <div class="date-result" >
-            <p id="startDateResult"> </p> &nbsp; 
-            <p id="dateLine" >-</p> &nbsp;
-            <p id="endDateResult"> </p>
-        </div>
-        <div class="experience-result" >
-            <p id="aboutExperienceResult" > </p>
-        </div>`
-        }
-        console.log(document.getElementById(`experienceResult-${key}`))
+
+function renderExperiencesTemplate() {
+    Object.keys(experiencesStore).forEach(key => {
+        experiencesContainer.innerHTML += experienceTemplate(experiencesStore[key], key)
     })
 }
 
-
-function renderExperiencesTemplate(){
-    Object.keys(experiencesStore).forEach(key => {
-        experiencesContainer.innerHTML  += experienceTemplate(experiencesStore[key], key)
-
-        experienceResult.innerHTML = experiencesStore[key].position.value
-        employerResult.innerHTML = experiencesStore[key].employer.value
-        startDateResult.innerHTML = experiencesStore[key].startDate.value
-        endDateResult.innerHTML = experiencesStore[key].endDate.value
-        aboutExperienceResult.innerHTML = experiencesStore[key].about.value
-        
-})
+function getItemById(id) {
+    return document.getElementById(id)
 }
-
-function clearExperiencesUI(){
+function clearExperiencesUI() {
     experiencesContainer.innerHTML = ''
     experienceResultParent.innerHTML = ''
 }
+function log(a) {
+    console.log(a)
+}
 
-function handleChange(e, targetKey, key ){
+function onInputResumeFields(target, id, value) {
+    const targetElement = getItemById(`${target}-${id}`)
+    console.log(targetElement, `${target}-${id}`)
+    if(targetElement) {
+        targetElement.innerHTML = value;
+    }
+}
 
-    experiencesStore[key][targetKey].value = e.target.value;
-    
+function handleChange(e, targetKey, key) {
+    const { value } = e.target;
+    experiencesStore[key][targetKey].value = value;
+    let resumeItem = document.getElementById(key)
+    if (resumeItem) onInputResumeFields(targetKey, key, value)
+    else {
+        resumeItem = createRenderResumeTemplate(key);
+        resumeContainer.append(resumeItem)
+        onInputResumeFields(targetKey, key, value)
+    };
     setItemToLocalStorage(EXPERIENCES_KEY, experiencesStore)
-
-    let value = e.target.value
+    
     
     if (value.length >= 2) {
         e.target.style.border = "1px solid #98E37E"
-        
+
     }else {
         e.target.style.border = "1px solid red"
-        positionCheck = false
     }if(targetKey === "position"){
-        // document.getElementById(`experienceResult${key}`).innerHTML = value
         positionCheck = true
     }else{
         positionCheck = false
     }if(targetKey === "employer"){
-        employerResult.innerHTML = value
         employerCheck = true
     }else{
         employerCheck = false
     }if(targetKey === "startDate"){
-        startDateResult.innerHTML = value
         startDateCheck = true
     }else{
         startDateCheck = false
     }if(targetKey === "endDate"){
-        endDateResult.innerHTML = value
         endDateCheck = true
     }else{
         endDateCheck = false
     }if(targetKey === "about"){
-        aboutExperienceResult.innerHTML = value
         aboutCheck = true
     }else{
         aboutCheck = false
     }
-    experienceTitle.style.display = 'block'
 }
 
-function setItemToLocalStorage(key){
+function createDiv() {
+    return document.createElement('div')
+}
+
+function resumeTemplate(id, experience) {
+    return `
+    <div class="position-employer-result" >
+    <h4 id="position-${id}" > ${experience?.position?.value || ""} </h4>
+    <h4>,</h4> &nbsp;
+    <h4 id="employer-${id}" > ${experience?.employer?.value || ""}</h4>
+    </div> 
+    <div class="date-result" >
+    <p id="startDate-${id}"> ${experience?.startDate?.value || ""}</p> &nbsp; 
+    <p>-</p> &nbsp;
+    <p id="endDate-${id}">  ${experience?.endDate?.value || ""}</p>
+    </div>
+    <div class="experience-result" >
+    <p id="about-${id}" >  ${experience?.about?.value || ""}</p>
+    </div>
+    `   
+}
+function createRenderResumeTemplate(id, experience) {
+    const wrapper = createDiv()
+    wrapper.setAttribute("id", id)
+    wrapper.innerHTML = resumeTemplate(id,experience)
+    return wrapper
+}
+
+function setItemToLocalStorage(key) {
     localStorage.setItem(key, JSON.stringify(experiencesStore))
 }
 
-function getItemFromLocalStorage(key){
-    let item  = localStorage.getItem(key)
+function getItemFromLocalStorage(key) {
+    let item = localStorage.getItem(key)
     return item ? JSON.parse(item) : null;
 }
 
@@ -254,8 +264,9 @@ function experienceTemplate(experience, key) {
 </div>
 `
 }
-// localStorage.removeItem("position")
-// localStorage.removeItem("employer")
-// localStorage.removeItem("startdate")
-// localStorage.removeItem("endDate")
-// localStorage.removeItem("aboutExperience")
+nextBtn.addEventListener("click", function(){
+    if(positionCheck, employerCheck, startDateCheck, endDateCheck, aboutCheck){
+        window.location.href = '/pages/education.html'
+    }
+})
+

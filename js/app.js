@@ -218,6 +218,18 @@ if(window.location.pathname === '/pages/experience.html'){
 
 }
 
+if(window.location.pathname === `/pages/education.html`){
+    resultName.innerHTML = info.name
+    resultLastName.innerHTML = info.lastName
+    resultEmail.innerHTML = ` <i class="fa-solid fa-at"></i>  ${info.email}`
+    resultNumber.innerHTML =  `<i class="fa-solid fa-phone phone"></i> ${info.number}`
+    if(resultAboutMe){
+        document.getElementById("hiddenAboutMe").style.display = "block"
+    }
+    resultAboutMe.innerHTML = info.aboutMe
+    resultImage.appendChild(img)
+}
+
 if(window.location.pathname === '/pages/private.html'){
     resultName.innerHTML = info.name
     resultLastName.innerHTML = info.lastName

@@ -420,7 +420,7 @@
     border: none;
     border-radius: 4px;
 }
-.experience-result-parent{
+#resume{
     max-width: 87%;
     margin: auto;
     margin-top: 20px;
@@ -480,12 +480,6 @@
     top: 30%;
     transform: translateY(50%);
     visibility: hidden;
-}
-#experienceTitle{
-    display: none;
-}
-#dateLine, #dot{
-    display: none;
 }
 .add-experience-form{
     margin-top: 35px;
