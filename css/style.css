@@ -484,3 +484,106 @@
 .add-experience-form{
     margin-top: 35px;
 }
+/* education section */
+
+.education-info-header{
+    max-width: 80%;
+    margin: auto;
+}
+.education-section{
+    display: flex;
+}
+.education-info{
+    width: 60%;
+    background: #F9F9F9;
+    padding-top: 30px;
+    height: 100vh;
+}
+.education-section-form{
+    max-width: 80%;
+    margin: auto;
+    margin-top: 35px;
+}
+
+#institute{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 10px;
+    margin: 7px 0;
+    width: 100%;
+}
+.institute-parent p{
+    color: gray;
+    font-size: 14px;
+}
+.grade-date-parent{
+    margin-top: 55px;
+    display: flex;
+    justify-content: space-between;
+}
+.grade-parent{
+    width: 35vh;
+}
+.education-end-date{
+    width: 35vh;
+}
+#educationDate{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 8px 24px 8px 24px;
+    margin: 7px 0;
+    width: 100%;
+}
+#grade{
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding: 8px 24px 8px 24px;
+    margin: 7px 0;
+    width: 100%;
+}
+#educationAbout{
+    width: 100%;
+    padding-bottom: 5rem;
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid #B8B8B8;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 7px;
+    resize: none;
+    margin: 7px 0;
+}
+.grade-date-parent{
+    margin-top: 55px;
+}
+.about-education-parent{
+    margin-top: 55px;
+}
+#addInstituteBtn{
+    background: #62A1EB;
+    padding: 18px 60px;
+    color: white;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    margin-top: 35px;
+    cursor: pointer;
+}
+.doneBtns{
+    display: flex;
+    max-width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    transform: translateY(15vh);
+}
+#backFromEducation, #doneFromEducation{
+    background: #6B40E3;
+    padding: 18px 60px;
+    border-radius: 4px;
+    color: white;
+    outline: none;
+    border: none;
+}
