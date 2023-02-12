@@ -25,7 +25,7 @@ function createEducation() {
             value: '',
             title: 'დამთავრების რიცხვი',
         },
-        about: {
+        aboutEducation: {
             value: '',
             title: 'აღწერა',
             placeHolder: 'განათლების აღწერა'
@@ -100,6 +100,8 @@ function handleChange(e, targetKey, key){
     const { value } = e.target
     educationStore[key][targetKey].value = value
     let item = document.getElementById(key)
+    clearResume()
+    renderEducationResume()
     if(item) onInputResumeFields(targetKey, key, value)
     else{
         item = createEducationRenderResumeTemplate(key, educationStore[key])
@@ -124,7 +126,7 @@ function handleChange(e, targetKey, key){
         dateCheck = true
     }else{
         dateCheck = false
-    }if(targetKey === "about"){
+    }if(targetKey === "aboutEducation"){
         aboutEducationCheck = true
     }else{
         aboutEducationCheck = false
@@ -143,6 +145,7 @@ function createDiv(){
 
 function educationResumeTemplate(id, education) {
     return `
+    <h3 id="educationTitle" style="color: #F93B1D;">განათლება<h3>
     <div class="institute-result" >
     <h4 id="institute-${id}" > ${education?.institute?.value || ""} </h4>
     <h4>,</h4> &nbsp;
@@ -152,8 +155,9 @@ function educationResumeTemplate(id, education) {
     <p id="date-${id}"> ${education?.date?.value || ""}</p>
     </div>
     <div class="education-about" >
-    <p id="educationAbout-${id}" >  ${education?.about?.value || ""}</p>
+    <p style="font-weight: 100;" id="educationAbout-${id}" >  ${education?.aboutEducation?.value || ""}</p>
     </div>
+    <hr style="margin:20px 0;" />
     `
 }
 console.log(educationStore)
@@ -199,9 +203,9 @@ function educationTemplate(education, key){
         </div>
     </div>
     <div class="about-education-parent" >
-        <h4>${education.about.title}</h4>
-        <textarea oninput="handleChange(event, 'about', ${key})" value="${education.about.value}" id="educationAbout"
-        placeholder="${education.about.placeHolder}">${education.about.value}</textarea>
+        <h4>${education.aboutEducation.title}</h4>
+        <textarea oninput="handleChange(event, 'aboutEducation', ${key})" value="${education.aboutEducation.value}" id="educationAbout"
+        placeholder="${education.aboutEducation.placeHolder}">${education.aboutEducation.value}</textarea>
     </div>
     <hr style="margin-top: 35px;">
     </div>

@@ -22,6 +22,9 @@ const EXPERIENCES_KEY = 'experiences'
 let counter = 0
 let experiencesStore = {}
 
+
+
+
 if(window.location.pathname === '/pages/experience.html' || window.location.pathname === '/pages/education.html'){
     const shouldRenderExperience = (experience) => {
         return Object.values(experience).some(item => item.value.length)
@@ -270,3 +273,4 @@ if(window.location.pathname === '/pages/experience.html' || window.location.path
         }
     })
 }
+
