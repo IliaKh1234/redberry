@@ -593,3 +593,6 @@
     outline: none;
     border: none;
 }
+.institute-result{
+    display: flex;
+}

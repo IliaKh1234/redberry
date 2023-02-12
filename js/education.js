@@ -1,5 +1,6 @@
 const educationsContainer = document.querySelector(".education-section-form")
 const addInstituteBtn = document.getElementById("addInstituteBtn")
+const educationResume = document.getElementById("educationResume")
 
 const EDUCATION_KEY = 'educations'
 let educationStore = {}
@@ -31,8 +32,13 @@ function createEducation() {
         }
     }
 }
-initEducationStore()
 
+const shouldRenderEducation = (education) =>{
+    return Object.values(education).some(item => item.value.length)
+}
+
+initEducationStore()
+renderEducationResume()
 function getId(){
     return Object.keys(educationStore).length
 }
@@ -58,15 +64,48 @@ function renderEducations(e){
     id++;
     clearEducationsUI()
     renderEducationsTemplate()
+    clearResume()
+    renderEducationResume()
+    
 }
 
 function clearEducationsUI() {
     educationsContainer.innerHTML = ''
 }
 
+function clearResume(){
+    educationResume.innerHTML = ""
+}
+
+function renderEducationResume(){
+    Object.keys(educationStore).forEach(key =>{
+        if (shouldRenderEducation(educationStore[key])){
+            document.getElementById("educationResume").append(createEducationRenderResumeTemplate(key, educationStore[key]))
+        }
+    })
+}
+
+function getItemById(id) {
+    return document.getElementById(id)
+}
+
+function onInputResumeFields(target, id, value){
+    const element = getItemById(`${target}-${id}`)
+    if(element){
+        element.innerHTML = value
+    }
+}
+
 function handleChange(e, targetKey, key){
     const { value } = e.target
     educationStore[key][targetKey].value = value
+    let item = document.getElementById(key)
+    if(item) onInputResumeFields(targetKey, key, value)
+    else{
+        item = createEducationRenderResumeTemplate(key, educationStore[key])
+        educationResume.append(item)
+        onInputResumeFields(targetKey, key, value)
+    }
     setItemToLocalStorage(EDUCATION_KEY, educationStore)
 
     if (value.length >= 2) {
@@ -98,6 +137,33 @@ function renderEducationsTemplate(){
     })
 }
 
+function createDiv(){
+    return document.createElement('div')
+}
+
+function educationResumeTemplate(id, education) {
+    return `
+    <div class="institute-result" >
+    <h4 id="institute-${id}" > ${education?.institute?.value || ""} </h4>
+    <h4>,</h4> &nbsp;
+    <h4 id="degree-${id}" > ${education?.grade?.value || ""}</h4>
+    </div> 
+    <div class="date-result" >
+    <p id="date-${id}"> ${education?.date?.value || ""}</p>
+    </div>
+    <div class="education-about" >
+    <p id="educationAbout-${id}" >  ${education?.about?.value || ""}</p>
+    </div>
+    `
+}
+console.log(educationStore)
+function createEducationRenderResumeTemplate(id, education){
+    const wrapper = createDiv()
+    wrapper.setAttribute('id', id)
+    wrapper.innerHTML = educationResumeTemplate(id, education)
+    return wrapper
+}
+
 function setItemToLocalStorage(key) {
     localStorage.setItem(key, JSON.stringify(educationStore))
 }
@@ -121,6 +187,7 @@ function educationTemplate(education, key){
             <h4>${education.grade.title}</h4>
             <select onchange="handleChange(event, 'grade', ${key})" id="grade">
                 <option>აირჩიეთ ხარისხი</option>
+                ${getDataForDegree()}
             </select>
         </div>
         <div class="education-end-date" >
@@ -139,14 +206,17 @@ function educationTemplate(education, key){
     <hr style="margin-top: 35px;">
     </div>
     </div>
-        `
+    `
 }
+const grade = document.getElementById("grade")
 
-let grade = document.getElementById("grade")
-fetch("https://resume.redberryinternship.ge/api/degrees")
+function getDataForDegree(){
+    fetch("https://resume.redberryinternship.ge/api/degrees")
   .then(res => res.json())
   .then(data => {
     for(let i = 0; i < data.length; i++){
         grade.innerHTML += `<option>${data[i].title}</option>`
     }
 })
+
+}
