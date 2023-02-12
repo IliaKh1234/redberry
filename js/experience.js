@@ -90,9 +90,11 @@ if(window.location.pathname === '/pages/experience.html' || window.location.path
         clearRenderResume()
         renderResume()
     }
+    
     function clearRenderResume() {
         resumeContainer.innerHTML = ""
     }
+
     function renderResume() {
         Object.keys(experiencesStore).forEach(key => {
             if (shouldRenderExperience(experiencesStore[key])) {

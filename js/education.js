@@ -4,6 +4,10 @@ const addInstituteBtn = document.getElementById("addInstituteBtn")
 const EDUCATION_KEY = 'educations'
 let educationStore = {}
 
+let instituteCheck = false
+let gradeCheck = false
+let dateCheck = false
+let aboutEducationCheck = false
 
 function createEducation() {
     return {
@@ -27,7 +31,8 @@ function createEducation() {
         }
     }
 }
-renderEducations
+initEducationStore()
+
 function getId(){
     return Object.keys(educationStore).length
 }
@@ -53,7 +58,6 @@ function renderEducations(e){
     id++;
     clearEducationsUI()
     renderEducationsTemplate()
-
 }
 
 function clearEducationsUI() {
@@ -64,6 +68,28 @@ function handleChange(e, targetKey, key){
     const { value } = e.target
     educationStore[key][targetKey].value = value
     setItemToLocalStorage(EDUCATION_KEY, educationStore)
+
+    if (value.length >= 2) {
+        e.target.style.border = "1px solid #98E37E"
+    }else {
+        e.target.style.border = "1px solid red"
+    }if(targetKey === "institute"){
+       instituteCheck = true
+    }else{
+        instituteCheck = false
+    }if(targetKey === "grade"){
+        gradeCheck = true
+    }else{
+        gradeCheck = false
+    }if(targetKey === "date"){
+        dateCheck = true
+    }else{
+        dateCheck = false
+    }if(targetKey === "about"){
+        aboutEducationCheck = true
+    }else{
+        aboutEducationCheck = false
+}
 }
 
 function renderEducationsTemplate(){
@@ -87,13 +113,13 @@ function educationTemplate(education, key){
         <input id="institute" type="text" 
         value="${education.institute.value}"
         placeholder="${education.institute.placeHolder}"
-        oninput="handleChange(event, 'institute', ${key}"/>
+        oninput="handleChange(event, 'institute', ${key})"/>
         <p>მინიმუმ 2 სიმბოლო</p>
     </div>
     <div class="grade-date-parent" >
         <div class="grade-parent" >
             <h4>${education.grade.title}</h4>
-            <select id="grade">
+            <select onchange="handleChange(event, 'grade', ${key})" id="grade">
                 <option value="test">test</option>
             </select>
         </div>
@@ -107,8 +133,8 @@ function educationTemplate(education, key){
     </div>
     <div class="about-education-parent" >
         <h4>${education.about.title}</h4>
-        <textarea value="${education.about.value}" id="educationAbout"
-        placeholder="${education.about.placeHolder}"></textarea>
+        <textarea oninput="handleChange(event, 'about', ${key})" value="${education.about.value}" id="educationAbout"
+        placeholder="${education.about.placeHolder}">${education.about.value}</textarea>
     </div>
     <hr style="margin-top: 35px;">
     </div>
