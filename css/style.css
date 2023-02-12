@@ -543,6 +543,7 @@
     padding: 8px 24px 8px 24px;
     margin: 7px 0;
     width: 100%;
+    
 }
 #educationAbout{
     width: 100%;
@@ -558,6 +559,7 @@
 }
 .grade-date-parent{
     margin-top: 55px;
+    display: flex;
 }
 .about-education-parent{
     margin-top: 55px;
@@ -571,6 +573,7 @@
     border: none;
     margin-top: 35px;
     cursor: pointer;
+    transform: translateX(10.5vh);
 }
 .doneBtns{
     display: flex;
