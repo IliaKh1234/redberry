@@ -66,7 +66,7 @@ function renderEducations(e){
     renderEducationsTemplate()
     clearResume()
     renderEducationResume()
-    
+    test()
 }
 
 function clearEducationsUI() {
@@ -189,9 +189,9 @@ function educationTemplate(education, key){
     <div class="grade-date-parent" >
         <div class="grade-parent" >
             <h4>${education.grade.title}</h4>
-            <select onchange="handleChange(event, 'grade', ${key})" id="grade">
+            <select oninput="handleChange(event, 'grade', ${key})" class="grade">
                 <option>აირჩიეთ ხარისხი</option>
-                ${getDataForDegree()}
+                
             </select>
         </div>
         <div class="education-end-date" >
@@ -212,15 +212,29 @@ function educationTemplate(education, key){
     </div>
     `
 }
-const grade = document.getElementById("grade")
 
+
+function test(){
+    const grades = document.querySelectorAll('.grade');
+    grades.forEach(grade => {
+        for(let i = 0; i < JSON.parse(localStorage.getItem("degrees")).length; i++){
+            grade.innerHTML += `<option>${JSON.parse(localStorage.getItem("degrees"))[i].title}</option>`  
+        }
+    });
+}
+test()
+console.log(JSON.parse(localStorage.getItem("degrees")))
 function getDataForDegree(){
     fetch("https://resume.redberryinternship.ge/api/degrees")
-  .then(res => res.json())
-  .then(data => {
-    for(let i = 0; i < data.length; i++){
-        grade.innerHTML += `<option>${data[i].title}</option>`
-    }
-})
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("degrees", JSON.stringify(data));
+        console.log(JSON.parse(localStorage.getItem("degrees")))
+    //   for(let i = 0; i < JSON.parse(localStorage.getItem("degrees")).length; i++){
+    //      grade.innerHTML += `<option>${JSON.parse(localStorage.getItem("degrees"))[i].title}</option>`
+         
+    //     }
 
+    })
 }
+

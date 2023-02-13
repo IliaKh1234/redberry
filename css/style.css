@@ -544,7 +544,7 @@
     margin: 7px 0;
     width: 100%;
 }
-#grade{
+.grade{
     border-radius: 3px;
     outline: none;
     border: 1px solid #B8B8B8;
