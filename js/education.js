@@ -66,7 +66,7 @@ function renderEducations(e){
     renderEducationsTemplate()
     clearResume()
     renderEducationResume()
-    test()
+    getGrades()
 }
 
 function clearEducationsUI() {
@@ -214,7 +214,7 @@ function educationTemplate(education, key){
 }
 
 
-function test(){
+function getGrades(){
     const grades = document.querySelectorAll('.grade');
     grades.forEach(grade => {
         for(let i = 0; i < JSON.parse(localStorage.getItem("degrees")).length; i++){
@@ -222,19 +222,13 @@ function test(){
         }
     });
 }
-test()
+getGrades()
 console.log(JSON.parse(localStorage.getItem("degrees")))
 function getDataForDegree(){
     fetch("https://resume.redberryinternship.ge/api/degrees")
     .then(res => res.json())
     .then(data => {
         localStorage.setItem("degrees", JSON.stringify(data));
-        console.log(JSON.parse(localStorage.getItem("degrees")))
-    //   for(let i = 0; i < JSON.parse(localStorage.getItem("degrees")).length; i++){
-    //      grade.innerHTML += `<option>${JSON.parse(localStorage.getItem("degrees"))[i].title}</option>`
-         
-    //     }
-
     })
 }
 
