@@ -92,6 +92,7 @@ if(window.location.pathname === '/pages/experience.html' || window.location.path
         renderExperiencesTemplate()
         clearRenderResume()
         renderResume()
+
     }
     
     function clearRenderResume() {
@@ -268,9 +269,8 @@ if(window.location.pathname === '/pages/experience.html' || window.location.path
     `
     }
     nextBtn.addEventListener("click", function(){
-        if(positionCheck, employerCheck, startDateCheck, endDateCheck, aboutCheck){
+        if(localStorage.getItem(EXPERIENCES_KEY)){
             window.location.href = '/pages/education.html'
         }
     })
 }
-

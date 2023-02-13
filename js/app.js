@@ -43,19 +43,21 @@ let emailCheck = false
 let numberCheck = false
 let imageCheck = false
 
-const clearAll = document.querySelector("clearAll")
+// const clearAll = document.querySelector("clearAll")
 
-if(clearAll){
-    clearAll.addEventListener("click", function(){
+
+    function clearAll(){
         localStorage.removeItem("name")
         localStorage.removeItem("lastName")
         localStorage.removeItem("email")
         localStorage.removeItem("number")
         localStorage.removeItem("image")
         localStorage.removeItem("aboutMe")
+        localStorage.removeItem("experiences")
+        localStorage.removeItem("educations")
         window.location.href = '../index.html'
-    })
-}
+    }
+
 
 if(window.location.pathname === '/pages/private.html'){
     name.addEventListener('keyup', function(event){

@@ -14,6 +14,8 @@ getDataForDegree((data)=>{
     getGrades()
 })
 
+
+
 function createEducation() {
     return {
         institute: {
@@ -275,18 +277,5 @@ let obj = {
     
 }
 
-
-    let data = getObj(obj)
-    var base64 = data.image;
-   var base64Parts = base64.split(",");
-   var fileFormat = base64Parts[0].split(";")[1];
-   var fileContent = base64Parts[1];
-   var file = new File([fileContent], "image", {type: fileFormat});
-    data = {...data, image: file}
-    try {
-        const response = await  sendDataRequest(data)
-            console.log({response})
-    } catch (error) {
-            console.log({error})
-    }
+console.log(obj)
 }
