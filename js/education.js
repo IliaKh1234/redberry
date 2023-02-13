@@ -9,6 +9,10 @@ let instituteCheck = false
 let gradeCheck = false
 let dateCheck = false
 let aboutEducationCheck = false
+getDataForDegree((data)=>{
+    localStorage.setItem("degrees", JSON.stringify(data));
+    getGrades()
+})
 
 function createEducation() {
     return {
@@ -160,7 +164,7 @@ function educationResumeTemplate(id, education) {
     <hr style="margin:20px 0;" />
     `
 }
-console.log(educationStore)
+
 function createEducationRenderResumeTemplate(id, education){
     const wrapper = createDiv()
     wrapper.setAttribute('id', id)
@@ -222,13 +226,67 @@ function getGrades(){
         }
     });
 }
-getGrades()
-console.log(JSON.parse(localStorage.getItem("degrees")))
-function getDataForDegree(){
-    fetch("https://resume.redberryinternship.ge/api/degrees")
-    .then(res => res.json())
-    .then(data => {
-        localStorage.setItem("degrees", JSON.stringify(data));
-    })
+
+// function getDataForDegree(){
+//     fetch("https://resume.redberryinternship.ge/api/degrees")
+//     .then(res => res.json())
+//     .then(data => {
+//         localStorage.setItem("degrees", JSON.stringify(data));
+//     })
+// }
+
+const arr = [JSON.parse(localStorage.getItem("experiences"))]
+
+
+function getObj(obj){
+
+return {
+    ...obj,
+    experiences: Object.values(obj.experiences).map(experience=>({
+        employer:experience.employer.value,
+        position:experience.position.value,
+        start_date: experience.startDate.value,
+        due_date: experience.endDate.value,
+        description: experience.about.value.trim(),
+    })),
+    educations: Object.values(obj.educations).map(education => ({
+        institute: education.institute.value,
+        degree: education.grade.value,
+        due_date: education.date.value,
+        description:education.aboutEducation.value
+    }))
 }
 
+}
+
+
+async function handleSubmit(e) {
+    e.preventDefault()
+let obj = {
+    name: localStorage.getItem("name"),
+    surname: localStorage.getItem("lastName"),
+    email: localStorage.getItem("email"),
+    phone_number: localStorage.getItem("number"),
+    experiences: JSON.parse(localStorage.getItem("experiences")),
+    educations: JSON.parse(localStorage.getItem("educations")),
+    image: localStorage.getItem("image"),
+    about_me: localStorage.getItem("aboutMe")
+
+    
+}
+
+
+    let data = getObj(obj)
+    var base64 = data.image;
+   var base64Parts = base64.split(",");
+   var fileFormat = base64Parts[0].split(";")[1];
+   var fileContent = base64Parts[1];
+   var file = new File([fileContent], "image", {type: fileFormat});
+    data = {...data, image: file}
+    try {
+        const response = await  sendDataRequest(data)
+            console.log({response})
+    } catch (error) {
+            console.log({error})
+    }
+}
